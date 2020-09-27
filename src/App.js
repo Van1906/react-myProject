@@ -1,15 +1,25 @@
 import React from 'react';
 import './App.css';
-import FormHeader from './less3-homework/formHeader';
-import FormFooter from './less3-homework/formFooter';
-import Form from './less3-homework/form'
+import Product from './less-4-homework/Product';
 
 function App() {
   return (
-    <div className='text-center'>
-      <FormHeader text='PLEASE, FILL THE FORM'/>
-      <Form name='Jhon'/>
-      <FormFooter/>
+    <div>
+        <table>
+          <caption>Products Table</caption>
+          <thead>
+              <tr>	
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Description</th>
+              </tr>
+          </thead>
+          <tbody>
+              <Product name='Apple' price='5$' description='Fresh apples from Armenia'/>
+              <Product name='Banaba' price='7$' description='Fresh bananas from Ecuador'/>
+              <Product name='Pich' price='6$' description='Fresh pich from Ecuador'/>
+          </tbody>
+        </table>
     </div>
   );
 }
