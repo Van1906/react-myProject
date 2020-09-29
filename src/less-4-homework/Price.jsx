@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 
 
 class Price extends Component{
@@ -6,7 +6,7 @@ class Price extends Component{
         super(props);
         this.state = {
             productPrice: props.price,
-            currency: '$'
+            currency: '$',
         }
     }
 
@@ -16,22 +16,24 @@ class Price extends Component{
         if(this.state.currency === '$') {
             this.setState({
                 productPrice: this.state.productPrice*487,
-                currency: '֏'
-            })
+                currency: '֏',
+            });
         } else {
             this.setState({
                 productPrice: this.state.productPrice/487,
-                currency: '$'
-            })
+                currency: '$',
+            });
         }
     };
 
 
     render() {
-        return <div>
+        return ( 
+                <div>
                     <span>{this.state.productPrice} {this.state.currency}</span>
                     <button onClick={this.handleClick}>Change the currency</button>
                 </div>
+        )
 
     }
 }
