@@ -1,5 +1,7 @@
 import React from 'react';
-import Task from './Task';
+import Task from './task/Task';
+import { ListGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
+
 
 class ToDo extends React.Component {
     state = {
@@ -10,8 +12,11 @@ class ToDo extends React.Component {
     handleClick = () =>{
         const {inputValue} = this.state;
         const tasks = [...this.state.tasks]
-        tasks.push(inputValue);
-
+        if(inputValue !== '') {
+            tasks.push(inputValue);
+        }
+       
+        // console.log(this.state);
         this.setState({
             tasks,
             inputValue: ''
@@ -30,18 +35,22 @@ class ToDo extends React.Component {
         const {tasks, inputValue} = this.state;
         return (
             <>
-                <input
-                    value = {inputValue}
-                    type="text"
-                    placeholder = 'Add mew task'
-                    onChange={this.handleChange}
-                />
-                <button
-                onClick={this.handleClick}
-                >
-                Add task
-                </button>
-                <ol>
+                <InputGroup className="mb-3 mt-3">
+                    <FormControl
+                        value = {inputValue}
+                        type="text"
+                        placeholder = 'Add new task'
+                        onChange={this.handleChange}
+                    />
+                    <InputGroup.Append>
+                    <Button 
+                        onClick={this.handleClick}
+                        variant="info">
+                        Add Task
+                    </Button>
+                    </InputGroup.Append>
+                </InputGroup>
+                <ListGroup>
                     {tasks.map((el, i)=>{
                         return (
                             <Task 
@@ -51,7 +60,7 @@ class ToDo extends React.Component {
                         )
                     })
                     }
-                </ol>
+                </ListGroup>
             </> 
         )
     };
