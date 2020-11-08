@@ -1,0 +1,15 @@
+.todoWrapper {
+    padding: 15px;
+}
+
+.input {
+    margin-bottom: 10px;
+}
+
+.task {
+    margin: 10px auto;
+}
+
+.actionButton {
+    margin: 5px;
+}
