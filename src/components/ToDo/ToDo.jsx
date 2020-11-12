@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import Task from '../task/Task';
 import idGenerator from '../../helpers/idGenerator';
 import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import styles from './todo.module.css'
 
-class ToDo extends React.Component {
+class ToDo extends PureComponent{
     state = {
         inputValue: '',
         tasks: [],
-        selectedTasks: new Set()
+        selectedTasks: new Set(),
+        openModal: false
     };
 
     handleInputChange = (event)=>{
@@ -76,6 +77,7 @@ class ToDo extends React.Component {
 
 
     render() {
+        console.log('ToDo render')
         const {tasks, inputValue, selectedTasks} = this.state;
         const tasksArray = tasks.map((task)=>{
             return (
@@ -123,7 +125,7 @@ class ToDo extends React.Component {
 
                     
                     <Row className='justify-content-center'>
-                        <Col xs={4}>
+                        <Col xs={6} md={4} className='text-center'>
                             <Button 
                             variant="outline-danger"
                             onClick={this.removeSelected}
@@ -132,7 +134,6 @@ class ToDo extends React.Component {
                             </Button>
                         </Col>
                     </Row>
-
 
                 </Container>
 

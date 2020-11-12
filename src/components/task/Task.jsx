@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // import { ListGroup } from 'react-bootstrap';
 import { InputGroup, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css'
 
-class Task extends Component {
+class Task extends PureComponent {
     state = {
         checked: false
     };
@@ -19,8 +19,13 @@ class Task extends Component {
         const {onCheck, data} = this.props;
         onCheck(data._id);
     }
+
+    componentWillUnmount(){
+        console.log('Task componentWillUnmpint')
+    }
    
     render() {
+        console.log('Task render')
         const task = this.props.data;
         const {checked} = this.state;
         const {disabled} = this.props;
