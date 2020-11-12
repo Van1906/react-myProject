@@ -1,15 +1,14 @@
 import React from 'react';
-// import Task from '../task/Task';
+import Task from '../task/Task';
 import idGenerator from '../../helpers/idGenerator';
-import { Container, Row, Col, InputGroup, FormControl, Button, Card } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import styles from './todo.module.css'
 
 class ToDo extends React.Component {
     state = {
         inputValue: '',
-        tasks: []
+        tasks: [],
+        selectedTasks: new Set()
     };
 
     handleInputChange = (event)=>{
@@ -49,32 +48,45 @@ class ToDo extends React.Component {
         })
     }
 
+    handleCheck = (taskId)=> {
+        const selectedTasks = new Set(this.state.selectedTasks);
+        if(selectedTasks.has(taskId)){
+            selectedTasks.delete(taskId);
+        }
+        else {
+            selectedTasks.add(taskId);
+        }
+        this.setState({
+            selectedTasks
+        });
+    }
+
+    removeSelected = ()=> {
+        let tasks = [...this.state.tasks];
+        this.state.selectedTasks.forEach((id)=>{
+            tasks = tasks.filter((task)=>task._id !== id)
+        });
+
+        this.setState({
+            tasks,
+            selectedTasks: new Set()
+        })
+
+    }
+
 
     render() {
-        const {tasks, inputValue} = this.state;
+        const {tasks, inputValue, selectedTasks} = this.state;
         const tasksArray = tasks.map((task)=>{
             return (
                 <Col key={task._id} xs={12} sm={6} md={4} lg={3} xl={2}>
-                <Card className={styles.task}>
-                    <Card.Body>
-                        <InputGroup.Prepend>
-                            <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-                        </InputGroup.Prepend>
-                        <Card.Title>{task.text.slice(0, 10)  + '...'}</Card.Title>
-                        <Card.Text>{task.text}</Card.Text>
-                        <Button variant="warning" className={styles.actionButton}>
-                            <FontAwesomeIcon icon={faEdit}/>   
-                        </Button>
-                        <Button 
-                        variant="danger" 
-                        className={styles.actionButton}
-                        onClick={()=>this.removeTask(task._id)}
-                        >
-                        <FontAwesomeIcon icon={faTrash}/>   
-                        </Button>
-                    </Card.Body>
-                </Card>
-            </Col>
+                    <Task 
+                    data={task}
+                    onRemove = {this.removeTask}
+                    onCheck={this.handleCheck}
+                    disabled = {!!selectedTasks.size}
+                    />
+                </Col>
             )
         });
 
@@ -91,9 +103,11 @@ class ToDo extends React.Component {
                                 onChange={this.handleInputChange}
                                 onKeyDown={this.handleKeyDown}
                                 value = {inputValue}
+                                disabled = {!!selectedTasks.size}
                                 />
                                 <InputGroup.Append>
-                                <Button variant="info"
+                                <Button 
+                                variant="info"
                                 onClick={this.addTask}
                                 disabled={!inputValue}
                                 >Add
@@ -106,6 +120,20 @@ class ToDo extends React.Component {
                     <Row>
                         {tasksArray}
                     </Row>
+
+                    
+                    <Row className='justify-content-center'>
+                        <Col xs={4}>
+                            <Button 
+                            variant="outline-danger"
+                            onClick={this.removeSelected}
+                            disabled={!selectedTasks.size}
+                            >Remove selected
+                            </Button>
+                        </Col>
+                    </Row>
+
+
                 </Container>
 
             </div>
