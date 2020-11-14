@@ -126,7 +126,7 @@ class ToDo extends PureComponent{
                     
                     <Row className='justify-content-center'>
                         <Col xs={6} md={4} className='text-center'>
-                            <Button 
+                            <Button
                             variant="outline-danger"
                             onClick={this.removeSelected}
                             disabled={!selectedTasks.size}
