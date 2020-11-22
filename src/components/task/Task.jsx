@@ -39,8 +39,8 @@ class Task extends PureComponent {
                         />
                     </InputGroup.Prepend>
 
-                    <Card.Title className="text-info" >{task.text.slice(0, 7)  + '...'}</Card.Title>
-                    <Card.Text>{task.text}</Card.Text>
+                    <Card.Title className="text-info" >{task.title}</Card.Title>
+                    <Card.Text>{task.description}</Card.Text>
 
                     <Button 
                     variant="warning" 

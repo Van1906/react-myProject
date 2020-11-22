@@ -12,7 +12,7 @@ class EditModal extends Component {
 
   handleEdit = (event) => {
     this.setState({
-        text: event.target.value,
+      title: event.target.value,
     });
   }
 
@@ -23,8 +23,8 @@ class EditModal extends Component {
   }
 
   handleSave = ()=> {
-    const {text} = this.state;
-    if(!text) {
+    const {title} = this.state;
+    if(!title) {
       return
     }
 
@@ -32,7 +32,7 @@ class EditModal extends Component {
   }
 
   render(){
-    const {text} = this.state;
+    const {title} = this.state;
     return (
       <Modal show={true} onHide={this.props.onClose} centered>
         <Modal.Header closeButton>
@@ -49,7 +49,7 @@ class EditModal extends Component {
         aria-describedby="basic-addon2"
         onChange={this.handleEdit}
         onKeyUp={this.handleKeyDown}
-        value = {text}
+        value = {title}
         />
         </Modal.Body>
         <Modal.Footer>

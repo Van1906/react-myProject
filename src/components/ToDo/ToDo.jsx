@@ -3,7 +3,6 @@ import Task from '../Task/Task';
 import AddTask from '../AddTask/AddTask';
 import Confirm from '../Confirm';
 import EditModal from '../EditModal';
-import idGenerator from '../../helpers/idGenerator';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from './todo.module.css';
 
@@ -15,24 +14,66 @@ class ToDo extends PureComponent{
         editTask: null
     };
 
-    addTask = (value) =>{
-
-        const newTask = {
-            text: value,
-            _id: idGenerator()
-        }
-
-        const tasks = [newTask, ...this.state.tasks]
-        this.setState({
-            tasks:tasks
+    componentDidMount(){
+        fetch("http://localhost:3001/task")
+        .then((res)=> res.json())
+        .then((response)=>{
+            if(response.error) {
+                throw response.error;
+            }
+            this.setState({
+                tasks:response
+            });
         })
+        .catch((error)=>{
+            console.log('error', error);
+        });
+    }
+
+    addTask = (data) =>{
+        const body = JSON.stringify(data);
+        fetch("http://localhost:3001/task", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body
+        })
+        .then((res)=> res.json())
+        .then((response)=>{
+            if(response.error) {
+                throw response.error;
+            }
+            const tasks = [response, ...this.state.tasks]
+            this.setState({
+                tasks:tasks
+            });
+        })
+        .catch((error)=>{
+            console.log('error', error);
+        });
     };
 
     removeTask = (taskId)=> {
-        const newTasks = this.state.tasks.filter(task=> task._id !== taskId)
-        this.setState({
-            tasks: newTasks
+        fetch(`http://localhost:3001/task/${taskId}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
+        .then((res)=> res.json())
+        .then((response)=>{
+            if(response.error) {
+                throw response.error;
+            }
+            const newTasks = this.state.tasks.filter(task => task._id !== taskId);
+            this.setState({
+                tasks: newTasks
+            });
+        })
+        .catch((error)=>{
+            console.log('error', error);
+        });
     }
 
     handleCheck = (taskId)=> {
@@ -49,17 +90,35 @@ class ToDo extends PureComponent{
     }
 
     removeSelected = ()=> {
-        let tasks = [...this.state.tasks];
-        this.state.selectedTasks.forEach((id)=>{
-            tasks = tasks.filter((task)=>task._id !== id)
-        });
-
-        this.setState({
-            tasks,
-            selectedTasks: new Set(),
-            showConfirm: false
+        const body = {
+            tasks: [...this.state.selectedTasks]
+        };
+        fetch("http://localhost:3001/task", {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
         })
-
+        .then((res)=> res.json())
+        .then((response)=>{
+            if(response.error) {
+                throw response.error;
+            }
+            let tasks = [...this.state.tasks];
+            this.state.selectedTasks.forEach((id)=>{
+                tasks = tasks.filter((task)=>task._id !== id)
+            });
+    
+            this.setState({
+                tasks,
+                selectedTasks: new Set(),
+                showConfirm: false
+            });
+        })
+        .catch((error)=>{
+            console.log('error', error);
+        });
     }
 
     toggleConfirm = ()=> {
@@ -75,18 +134,31 @@ class ToDo extends PureComponent{
     }
 
     saveEditTask = (editedTask) => {
-        const tasks = [...this.state.tasks];
-        const taskIndex = tasks.findIndex((task)=>task._id === editedTask._id);
-        tasks[taskIndex] = editedTask;
-
-        this.setState({
-            tasks: tasks,
-            editTask: null
+        fetch(`http://localhost:3001/task/${editedTask._id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(editedTask)
+        })
+        .then((res)=> res.json())
+        .then((response)=>{
+            if(response.error) {
+                throw response.error;
+            }
+            const tasks = [...this.state.tasks];
+            const taskIndex = tasks.findIndex((task)=>task._id === editedTask._id);
+            tasks[taskIndex] = response;
+    
+            this.setState({
+                tasks: tasks,
+                editTask: null
+            });
+        })
+        .catch((error)=>{
+            console.log('error', error);
         });
-
     } 
-
-
     render() {
         console.log('ToDo render')
         const {tasks, selectedTasks, showConfirm, editTask} = this.state;

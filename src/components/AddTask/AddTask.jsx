@@ -27,7 +27,11 @@ class Addtask extends Component {
             return;
         }
 
-        this.props.onAdd(inputValue);
+        const task = {
+            title: inputValue
+        }
+
+        this.props.onAdd(task);
 
         this.setState({
             inputValue: ''
