@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Task from '../Task/Task';
 import AddTask from '../AddTask/AddTask';
 import Confirm from '../Confirm';
-import EditModal from '../EditModal';
+import EditModal from '../EditModal/EditModal';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from './todo.module.css';
 
@@ -175,7 +175,7 @@ class ToDo extends PureComponent{
         const {tasks, selectedTasks, showConfirm, editTask, openNewTaskModal} = this.state;
         const tasksArray = tasks.map((task)=>{
             return (
-                <Col key={task._id} xs={12} sm={6} md={4} lg={3} xl={2}>
+                <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
                     <Task 
                     data={task}
                     onRemove = {this.removeTask}

@@ -4,6 +4,7 @@ import styles from './addTask.module.css';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { dateFormat } from '../../helpers/utils'
 
 
 class Addtask extends Component {
@@ -27,14 +28,15 @@ class Addtask extends Component {
     }
 
     addTask = () =>{
-        const {title, description} = this.state;
+        const {title, description, date} = this.state;
         if(!title) {
             return;
         }
 
         const task = {
             title,
-            description
+            description,
+            date: dateFormat(date.toISOString())
         }
 
         this.props.onAdd(task);
@@ -53,7 +55,8 @@ class Addtask extends Component {
             <Modal 
             show={true} 
             onHide={onClose} 
-            centered>
+            centered
+            >
                 <Modal.Header closeButton>
                 <Modal.Title 
                 className="text-info"
@@ -75,10 +78,10 @@ class Addtask extends Component {
                     placeholder = 'Description'
                     onChange={this.handleChange} 
                     />
-                    
                     <DatePicker
                     className = {styles.date}
-                    selected={new Date()} 
+                    selected={this.state.date}
+                    minDate={new Date()}
                     onChange={this.handleDateChange} 
                     />
                 </Modal.Body>
@@ -103,7 +106,7 @@ class Addtask extends Component {
 
 Addtask.propTypes = {
     onAdd: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
 }
 
 export default Addtask;
