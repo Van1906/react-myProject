@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.css';
-import FormHeader from './less3-homework/formHeader';
-import FormFooter from './less3-homework/formFooter';
-import Form from './less3-homework/form'
+import ToDo from './components/ToDo/ToDo';
+// import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
-    <div className='text-center'>
-      <FormHeader text='PLEASE, FILL THE FORM'/>
-      <Form name='Jhon'/>
-      <FormFooter/>
+    <div>
+      {/* <Container>
+        <Row className="justify-content-center">
+          <Col xs={8} sm={8} md={6} lg={6}>
+            <ToDo />
+          </Col>
+        </Row>
+      </Container> */}
+
+      <ToDo />  
     </div>
   );
 }
