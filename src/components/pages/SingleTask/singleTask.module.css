@@ -1,0 +1,43 @@
+.task {
+    margin: 20px 100px;
+    background: rgb(0 123 255 / 3%)!important;
+    
+}
+
+.date {
+    font-size: 14px;
+}
+
+.actionButton {
+    margin: 5px;
+}
+
+
+@media (max-width: 991px) {
+ .task {
+    margin: 20px 70px;
+ }
+}
+
+
+@media (max-width: 768px) {
+    .task {
+        margin: 20px 50px;
+    }
+
+    .titleFont {
+        font-size: 25px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .task {
+        margin: 20px 30px;
+     }
+}
+
+
+
+
+

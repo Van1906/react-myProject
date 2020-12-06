@@ -1,0 +1,38 @@
+.activePage{
+    color: #ffffff!important;
+    background-color: #6c757d!important;
+
+}
+
+.navLink {
+    margin: 0 10px;
+    font-size: 20px;
+    color: #6c757d;
+    padding: 7px 10px;
+    transition: all .5s ease-out;
+}
+
+.navLink:hover {
+    color: #ffffff;
+    background-color: #6c757d;
+    text-decoration: none;
+}
+
+
+.navBar {
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+
+
+@media (max-width: 991px) {
+    .navCollapse {
+        margin-top: 10px;
+    }
+
+    .navLink {
+        margin: 0;
+    }
+}

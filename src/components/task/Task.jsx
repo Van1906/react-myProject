@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
 import PropTypes from 'prop-types';
-import { dateFormat } from '../../helpers/utils'
+import { dateFormat } from '../../helpers/utils';
+import { Link } from 'react-router-dom';
 
 class Task extends PureComponent {
     state = {
@@ -20,29 +21,42 @@ class Task extends PureComponent {
         onCheck(data._id);
     }
 
-    componentWillUnmount(){
-        console.log('Task componentWillUnmpint')
-    }
-   
     render() {
-        console.log('Task render')
         const task = this.props.data;
         const {checked} = this.state;
         const {disabled} = this.props;
+        
         return(
             <>
             <Card className={`${styles.task} ${checked? styles.selected: ''}`}>
                 <Card.Body>
-                    <InputGroup.Prepend>
+                    <InputGroup.Prepend className={styles.checkbox}>
                         <InputGroup.Checkbox 
                         onClick={this.handleCheck}
                         />
                     </InputGroup.Prepend>
-                    <Card.Title className="text-info"><h4>{task.title}</h4></Card.Title>
-                    <Card.Text className='font-italic mb-0'>Description: </Card.Text>
-                    <Card.Text className='font-weight-bold'>{task.description}</Card.Text>
-                    <Card.Text className={`${styles.date} text-secondary`}><span className='font-italic'>Date:</span> {dateFormat(task.date)}</Card.Text>
-                    <Card.Text className={`${styles.date} text-secondary`}><span className='font-italic'>Created at:</span> {dateFormat(task.created_at)}</Card.Text>
+                    <Card.Title>
+                        <Link 
+                        to={`/task/${task._id}`} 
+                        className="text-info text-decoration-none">
+                        <h5>{task.title}</h5>
+                        </Link>
+                    </Card.Title>
+                    <Card.Text 
+                    className='font-italic mb-0'>
+                    Description: 
+                    </Card.Text>
+                    <Card.Text 
+                    className='font-weight-bold'>
+                    {task.description}
+                    </Card.Text>
+                    <Card.Text 
+                    className={`${styles.date} text-secondary`}>
+                    <span className='font-italic'>Date:</span> {dateFormat(task.date)}
+                    </Card.Text>
+                    <Card.Text className={`${styles.date} text-secondary`}>
+                    <span className='font-italic'>Created at:</span> {dateFormat(task.created_at)}
+                    </Card.Text>
                     <Button 
                     variant="warning" 
                     className={styles.actionButton}
