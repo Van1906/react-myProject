@@ -10,9 +10,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
-
-
-
   return (
     <div>
       <NavMenu />

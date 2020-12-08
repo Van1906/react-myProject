@@ -11,7 +11,7 @@ import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 export default class SingleTask extends PureComponent{
     state = {
         task: null,
-        editModal: false
+        openEditModal: false
     }
     componentDidMount(){
         const taskId = this.props.match.params.id;
@@ -37,7 +37,8 @@ export default class SingleTask extends PureComponent{
         });
     }
 
-    deleteTask = (taskId)=> {
+    onRemove = ()=> {
+        const taskId = this.state.task._id;
         fetch(`http://localhost:3001/task/${taskId}`, {
             method: 'DELETE',
             headers: {
@@ -50,10 +51,6 @@ export default class SingleTask extends PureComponent{
                 throw response.error;
             }
 
-            this.setState({
-                task: null
-            });
-
             this.props.history.push('/');
         })
         .catch((error)=>{
@@ -61,14 +58,21 @@ export default class SingleTask extends PureComponent{
         });
     }
 
+    toggleEditModal = ()=>{
+        this.setState({
+            openEditModal: !this.state.openEditModal
+        })
+        
+    }
 
-    saveEditTask = (task) => {
-        fetch(`http://localhost:3001/task/${task._id}`, {
+
+    saveEditTask = (editTask) => {
+        fetch(`http://localhost:3001/task/${editTask._id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(task)
+            body: JSON.stringify(editTask)
         })
         .then((res)=> res.json())
         .then((response)=>{
@@ -77,8 +81,8 @@ export default class SingleTask extends PureComponent{
             }
 
             this.setState({
-                task: task,
-                editModal: false
+                task: response,
+                openEditModal: false
             });
         })
         .catch((error)=>{
@@ -87,11 +91,8 @@ export default class SingleTask extends PureComponent{
     } 
 
 
-
-
-
     render(){
-        const {task, editModal} = this.state;
+        const {task, openEditModal} = this.state;
 
         return(
             <>
@@ -123,7 +124,7 @@ export default class SingleTask extends PureComponent{
                                         <Button 
                                         variant="warning" 
                                         className={styles.actionButton}
-                                        onClick={()=>this.setState({editModal: true})}
+                                        onClick={this.toggleEditModal}
                                         >
                                         <FontAwesomeIcon icon={faEdit}/>  
                                         </Button>
@@ -131,7 +132,7 @@ export default class SingleTask extends PureComponent{
                                         <Button 
                                         variant="danger" 
                                         className={styles.actionButton}
-                                        onClick={()=>this.deleteTask(task._id)}
+                                        onClick={this.onRemove}
                                         >
                                         <FontAwesomeIcon icon={faTrash}/>   
                                         </Button>
@@ -142,11 +143,11 @@ export default class SingleTask extends PureComponent{
                         }
 
                         {
-                            editModal &&
+                            openEditModal &&
                             <EditModal
                             data = {task} 
                             onSave = {this.saveEditTask}
-                            onClose = {()=>this.setState({editModal: false})}
+                            onClose = {this.toggleEditModal}
                             />
                         }
                         </Col>

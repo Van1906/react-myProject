@@ -1,0 +1,44 @@
+.colStyle {
+    background: rgb(0 123 255 / 3%);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titleBlock {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.aboutTitle {
+    color: #0f6674 ;
+    margin-bottom: 20px;
+}
+
+.aboutInfo li {
+padding-left: 15px;
+}
+
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 35px!important;
+    }
+
+    h5 {
+        font-size: 18px!important;
+    }
+}
+
+
+@media (max-width: 991px) {
+    h1 {
+        font-size: 32px!important;
+    }
+
+    h5 {
+        font-size: 17px!important;
+    }
+}
+
+
