@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState, memo } from 'react';
 import { InputGroup, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -7,32 +7,30 @@ import PropTypes from 'prop-types';
 import { dateFormat, descripFormat } from '../../helpers/utils';
 import { Link } from 'react-router-dom';
 
-class Task extends PureComponent {
-    state = {
-        checked: false
-    };
 
-    handleCheck = ()=>{
-        this.setState({
-            checked: !this.state.checked
-        });
 
-        const {onCheck, data} = this.props;
+function Task(props){
+
+    const [checked, setCheck] = useState(false);
+
+    const handleCheck = ()=>{
+        setCheck(!checked);
+
+        const {onCheck, data} = props;
         onCheck(data._id);
     }
 
-    render() {
-        const task = this.props.data;
-        const {checked} = this.state;
-        const {disabled} = this.props;
-        
+
+    const task = props.data;
+    const {disabled} = props;
+
         return(
             <>
             <Card className={`${styles.task} ${checked? styles.selected: ''}`}>
                 <Card.Body>
                     <InputGroup.Prepend className={styles.checkbox}>
                         <InputGroup.Checkbox 
-                        onClick={this.handleCheck}
+                        onClick={handleCheck}
                         />
                     </InputGroup.Prepend>
                     <Card.Title>
@@ -60,7 +58,7 @@ class Task extends PureComponent {
                     <Button 
                     variant="warning" 
                     className={styles.actionButton}
-                    onClick={()=>this.props.onEdit(task)}
+                    onClick={()=>props.onEdit(task)}
                     disabled = {disabled}
                     >
                     <FontAwesomeIcon icon={faEdit}/>  
@@ -69,7 +67,7 @@ class Task extends PureComponent {
                     <Button 
                     variant="danger" 
                     className={styles.actionButton}
-                    onClick={()=>this.props.onRemove(task._id)}
+                    onClick={()=>props.onRemove(task._id)}
                     disabled = {disabled}
                     >
                     <FontAwesomeIcon icon={faTrash}/>   
@@ -78,8 +76,10 @@ class Task extends PureComponent {
             </Card>
             </>
         )
-    }
 };
+
+
+
 
 
 Task.propTypes = {
@@ -89,4 +89,4 @@ Task.propTypes = {
     disabled: PropTypes.bool.isRequired,
 }
 
-export default Task;
+export default memo(Task);
