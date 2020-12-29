@@ -2,91 +2,41 @@ import React, { useState, useEffect, memo } from 'react';
 import { useParams, useHistory } from "react-router";
 import { dateFormat } from '../../../helpers/utils';
 import EditModal from '../../EditModal/EditModal'
-import Spinner from '../../Spinner/Spinner';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import styles from './singleTask.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import {getSingleTask, removeTask} from '../../../store/actions';
 
 
 
-function SingleTask(){
-    const [task, setTask] = useState(null);
+function SingleTask(props){
     const [openEditModal, setOpenEditModal] = useState(false);
     const {id}= useParams();
     const history = useHistory();
-
+    const redirectHome = history.push;
+  
     useEffect(()=>{
-        fetch(`http://localhost:3001/task/${id}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((res)=> res.json())
-        .then((response)=>{
-            if(response.error) {
-                throw response.error;
-            }
-
-            setTask(response);
-            
-        })
-        .catch((error)=>{
-            console.log('error', error);
-        });
+        props.getSingleTask(id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
-    const onRemove = ()=> {
-        const taskId = task._id;
-        fetch(`http://localhost:3001/task/${taskId}`, {
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((res)=> res.json())
-        .then((response)=>{
-            if(response.error) {
-                throw response.error;
-            }
+    useEffect(()=>{
+        if(props.editTaskSuccess) {
+            setOpenEditModal(false);
+        }
 
-            history.push('/');
-        })
-        .catch((error)=>{
-            console.log('error', error);
-        });
-    }
+    }, [props.editTaskSuccess]);
+
 
     const toggleEditModal = ()=>{
         setOpenEditModal(!openEditModal);
         
     }
-
-
-    const saveEditTask = (editTask) => {
-        fetch(`http://localhost:3001/task/${editTask._id}`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(editTask)
-        })
-        .then((res)=> res.json())
-        .then((response)=>{
-            if(response.error) {
-                throw response.error;
-            }
-
-            setTask(response);
-            setOpenEditModal(false);
-        })
-        .catch((error)=>{
-            console.log('error', error);
-        });
-    } 
+  
+    const task = props.task;
 
     return(
         <>
@@ -126,21 +76,21 @@ function SingleTask(){
                                     <Button 
                                     variant="danger" 
                                     className={styles.actionButton}
-                                    onClick={onRemove}
+                                    onClick={()=>props.removeTask(task._id, 'single', redirectHome)}
                                     >
                                     <FontAwesomeIcon icon={faTrash}/>   
                                     </Button>
                                 </Card.Body>
                             </Card>
                         </div> :
-                        <Spinner />
+                        <h1>No task found !!!</h1>
                     }
 
                     {
                         openEditModal &&
                         <EditModal
-                        data = {task} 
-                        onSave = {saveEditTask}
+                        data = {props.task} 
+                        from = 'single'
                         onClose = {toggleEditModal}
                         />
                     }
@@ -151,4 +101,21 @@ function SingleTask(){
     )
 }
 
-export default memo(SingleTask);
+
+const mapStateToProps = state => ({
+    task: state.task,
+    editTaskSuccess:state.editTaskSuccess
+  });
+
+  
+const mapDispatchToProps = {
+    getSingleTask,
+    removeTask
+};
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(memo(SingleTask));
+
+
+
+
+

@@ -16,16 +16,17 @@
   }
 
 
-  .spinnerContainer {
-      background-color: #f8f9fa;
-      width: 100%;
-      height: 100vh;
-      position: absolute;
-      top: -71px;
-      left: 0px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  .spinnerApp {
+    background-color: #f8f9fa;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 999999;
+    top: 0;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 
@@ -97,10 +98,3 @@
     }
   }
   
-
-
-  @media (max-width: 991px) {
-    .spinnerContainer {
-      top: -67px;
-    }
-   }  

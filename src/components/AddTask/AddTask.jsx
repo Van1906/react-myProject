@@ -4,7 +4,9 @@ import styles from './addTask.module.css';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { dateFormat } from '../../helpers/utils'
+import { dateFormat } from '../../helpers/utils';
+import {connect} from 'react-redux';
+import {addTask} from '../../store/actions';
 
 
 class Addtask extends Component {
@@ -50,7 +52,9 @@ class Addtask extends Component {
             date: dateFormat(date.toISOString())
         }
 
-        this.props.onAdd(task);
+        // this.props.onAdd(task);
+        this.props.addTask(task);
+
     };
 
     handleDateChange = (date) =>{
@@ -117,9 +121,12 @@ class Addtask extends Component {
 };
 
 Addtask.propTypes = {
-    onAdd: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
 }
 
-export default Addtask;
+const mapDispatchToProps = {
+    addTask
+};
+
+export default connect(null, mapDispatchToProps)(Addtask);
 
