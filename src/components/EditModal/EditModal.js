@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Modal, FormControl, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
@@ -14,7 +14,12 @@ class EditModal extends Component {
       ...props.data,
       date: date ? new Date(props.data.date): new Date()
     }
+    this.titleRef = createRef(null);
   };
+
+  componentDidMount(){
+    this.titleRef.current.focus();
+  }
 
   handleEdit = (event)=>{
     const {name, value} = event.target;
@@ -70,17 +75,19 @@ class EditModal extends Component {
         value = {title}
         onChange={this.handleEdit}
         onKeyUp={this.handleKeyUp}
+        ref = {this.titleRef}
+        className={styles.focused}
         />
         <FormControl 
         as="textarea" 
         name = 'description'
         value = {description}
-        className={styles.textArea}
+        className={`${styles.textArea} ${styles.focused}`}
         placeholder = 'Description'
         onChange={this.handleEdit} 
         />
         <DatePicker
-        className = {styles.date}
+        className = {`${styles.date} ${styles.focused}`}
         selected={date} 
         minDate={new Date()}
         onChange={this.handleDateChange} 

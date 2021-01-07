@@ -8,11 +8,22 @@ import { dateFormat } from '../../helpers/utils'
 
 
 class Addtask extends Component {
-    state = {
-        title : '',
-        description: '',
-        date: new Date()
+    constructor(props){
+        super(props);
+
+        this.state = {
+            title : '',
+            description: '',
+            date: new Date()
+        }
+
+        this.titleRef = React.createRef(null)
     }
+
+    componentDidMount(){
+        this.titleRef.current.focus();
+      }
+
 
     handleChange = (event)=>{
         const {name, value} = event.target;
@@ -70,6 +81,7 @@ class Addtask extends Component {
                     name = 'title'
                     onChange={this.handleChange}
                     onKeyDown={this.handleKeyDown}
+                    ref = {this.titleRef}
                     />
                     <FormControl 
                     as="textarea" 

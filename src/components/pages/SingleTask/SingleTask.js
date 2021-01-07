@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect, memo } from 'react';
+import { useParams, useHistory } from "react-router";
 import { dateFormat } from '../../../helpers/utils';
 import EditModal from '../../EditModal/EditModal'
 import Spinner from '../../Spinner/Spinner';
@@ -8,14 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 
-export default class SingleTask extends PureComponent{
-    state = {
-        task: null,
-        openEditModal: false
-    }
-    componentDidMount(){
-        const taskId = this.props.match.params.id;
-        fetch(`http://localhost:3001/task/${taskId}`, {
+
+function SingleTask(){
+    const [task, setTask] = useState(null);
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const {id}= useParams();
+    const history = useHistory();
+
+    useEffect(()=>{
+        fetch(`http://localhost:3001/task/${id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
@@ -27,18 +29,17 @@ export default class SingleTask extends PureComponent{
                 throw response.error;
             }
 
-            this.setState({
-                task:response,
-            });
+            setTask(response);
             
         })
         .catch((error)=>{
             console.log('error', error);
         });
-    }
+    }, [id]);
 
-    onRemove = ()=> {
-        const taskId = this.state.task._id;
+
+    const onRemove = ()=> {
+        const taskId = task._id;
         fetch(`http://localhost:3001/task/${taskId}`, {
             method: 'DELETE',
             headers: {
@@ -51,22 +52,20 @@ export default class SingleTask extends PureComponent{
                 throw response.error;
             }
 
-            this.props.history.push('/');
+            history.push('/');
         })
         .catch((error)=>{
             console.log('error', error);
         });
     }
 
-    toggleEditModal = ()=>{
-        this.setState({
-            openEditModal: !this.state.openEditModal
-        })
+    const toggleEditModal = ()=>{
+        setOpenEditModal(!openEditModal);
         
     }
 
 
-    saveEditTask = (editTask) => {
+    const saveEditTask = (editTask) => {
         fetch(`http://localhost:3001/task/${editTask._id}`, {
             method: 'PUT',
             headers: {
@@ -80,81 +79,75 @@ export default class SingleTask extends PureComponent{
                 throw response.error;
             }
 
-            this.setState({
-                task: response,
-                openEditModal: false
-            });
+            setTask(response);
+            setOpenEditModal(false);
         })
         .catch((error)=>{
             console.log('error', error);
         });
     } 
 
+    return(
+        <>
+            <Container fluid>
+                <Row className='justify-content-center'>
+                    <Col xs={12}>
+                    {!!task ?
+                        <div >
+                            <Card className={styles.task}>
+                                <Card.Body>
+                                    <Card.Title>
+                                    <h3 className={`${styles.titleFont} text-info`} >{task.title}</h3>
+                                    </Card.Title>
+                                    <Card.Text 
+                                    className='font-italic mb-0'>
+                                    Description: 
+                                    </Card.Text>
+                                    <Card.Text 
+                                    className='font-weight-bold'>
+                                    {task.description}
+                                    </Card.Text>
+                                    <Card.Text 
+                                    className={`${styles.date} text-secondary mb-0`}>
+                                    <span className='font-italic'>Date:</span> {dateFormat(task.date)}
+                                    </Card.Text>
+                                    <Card.Text className={`${styles.date} text-secondary`}>
+                                    <span className='font-italic'>Created at:</span> {dateFormat(task.created_at)}
+                                    </Card.Text>
+                                    <Button 
+                                    variant="warning" 
+                                    className={styles.actionButton}
+                                    onClick={toggleEditModal}
+                                    >
+                                    <FontAwesomeIcon icon={faEdit}/>  
+                                    </Button>
 
-    render(){
-        const {task, openEditModal} = this.state;
+                                    <Button 
+                                    variant="danger" 
+                                    className={styles.actionButton}
+                                    onClick={onRemove}
+                                    >
+                                    <FontAwesomeIcon icon={faTrash}/>   
+                                    </Button>
+                                </Card.Body>
+                            </Card>
+                        </div> :
+                        <Spinner />
+                    }
 
-        return(
-            <>
-                <Container fluid>
-                    <Row className='justify-content-center'>
-                        <Col xs={12}>
-                        {!!task ?
-                            <div >
-                                <Card className={styles.task}>
-                                    <Card.Body>
-                                        <Card.Title>
-                                        <h3 className={`${styles.titleFont} text-info`} >{task.title}</h3>
-                                        </Card.Title>
-                                        <Card.Text 
-                                        className='font-italic mb-0'>
-                                        Description: 
-                                        </Card.Text>
-                                        <Card.Text 
-                                        className='font-weight-bold'>
-                                        {task.description}
-                                        </Card.Text>
-                                        <Card.Text 
-                                        className={`${styles.date} text-secondary mb-0`}>
-                                        <span className='font-italic'>Date:</span> {dateFormat(task.date)}
-                                        </Card.Text>
-                                        <Card.Text className={`${styles.date} text-secondary`}>
-                                        <span className='font-italic'>Created at:</span> {dateFormat(task.created_at)}
-                                        </Card.Text>
-                                        <Button 
-                                        variant="warning" 
-                                        className={styles.actionButton}
-                                        onClick={this.toggleEditModal}
-                                        >
-                                        <FontAwesomeIcon icon={faEdit}/>  
-                                        </Button>
-
-                                        <Button 
-                                        variant="danger" 
-                                        className={styles.actionButton}
-                                        onClick={this.onRemove}
-                                        >
-                                        <FontAwesomeIcon icon={faTrash}/>   
-                                        </Button>
-                                    </Card.Body>
-                                </Card>
-                            </div> :
-                            <Spinner />
-                        }
-
-                        {
-                            openEditModal &&
-                            <EditModal
-                            data = {task} 
-                            onSave = {this.saveEditTask}
-                            onClose = {this.toggleEditModal}
-                            />
-                        }
-                        </Col>
-                    </Row>
-                </Container>
-            </>
-        )
-    }
-
+                    {
+                        openEditModal &&
+                        <EditModal
+                        data = {task} 
+                        onSave = {saveEditTask}
+                        onClose = {toggleEditModal}
+                        />
+                    }
+                    </Col>
+                </Row>
+            </Container>
+        </>
+    )
 }
+
+export default memo(SingleTask);
