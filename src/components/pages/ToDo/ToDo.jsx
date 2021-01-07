@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import Task from '../Task/Task';
-import AddTask from '../AddTask/AddTask';
-import Confirm from '../Confirm';
-import EditModal from '../EditModal/EditModal';
+import Task from '../../Task/Task';
+import AddTask from '../../AddTask/AddTask';
+import Confirm from '../../Confirm';
+import EditModal from '../../EditModal/EditModal';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from './todo.module.css';
 
@@ -171,9 +171,8 @@ class ToDo extends PureComponent{
 
 
     render() {
-        console.log('ToDo render')
         const {tasks, selectedTasks, showConfirm, editTask, openNewTaskModal} = this.state;
-        const tasksArray = tasks.map((task)=>{
+        const tasksArray = tasks.map((task, index)=>{
             return (
                 <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
                     <Task 
@@ -182,6 +181,7 @@ class ToDo extends PureComponent{
                     onCheck={this.handleCheck}
                     onEdit = {this.toggleEditModal}
                     disabled = {!!selectedTasks.size}
+
                     />
                 </Col>
             )

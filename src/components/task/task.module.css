@@ -1,5 +1,6 @@
 .task {
     margin: 10px auto;
+    background: rgb(0 123 255 / 3%)!important;
 }
 
 .actionButton {
@@ -13,3 +14,8 @@
 .date {
     font-size: 14px;
 }
+
+.checkbox {
+    justify-content: flex-end;
+}
+
