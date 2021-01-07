@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons';
 import styles from './contact.module.css'
 
-export default function Contact(){
+
+const defaultvalues = {
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+};
+
+
+ function Contact(){
+
+    const [values, setvalues] = useState({
+        defaultvalues
+    });
+
+    const handleChang = ({target: {name, value}})=>{
+        setvalues({
+            ...values,
+            [name]: value
+
+        })
+    };
+
+    const send = ()=>{
+        console.log('values', values);
+        setvalues(defaultvalues);
+    }
+
+
     return(
         <>
         <Container className={styles.wrapper}>
@@ -23,19 +51,52 @@ export default function Contact(){
                         <h1 className='text-center'>Contact us</h1>
                         <div className={styles.formGroup}>
                         <Form>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Control type="text" placeholder="Your name" />
+                            <Form.Group>
+                                <Form.Control 
+                                type="text" 
+                                placeholder="Your name" 
+                                value={values.name} 
+                                onChange={handleChang}
+                                name='name'
+                                />
                             </Form.Group>
 
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Control type="email" placeholder="Your email" />
+                            <Form.Group>
+                                <Form.Control 
+                                type="email" 
+                                placeholder="Your email" 
+                                value={values.email} 
+                                onChange={handleChang}
+                                name='email'
+                                />
                             </Form.Group>
 
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" placeholder="Message" />
+                            <Form.Group>
+                                <Form.Control 
+                                type="phone" 
+                                placeholder="Your phone number" 
+                                value={values.phone} 
+                                onChange={handleChang}
+                                name='phone'
+                                />
                             </Form.Group>
 
-                            <Button variant="info" type="submit" className={styles.buttonSend}>
+                            <Form.Group>
+                                <Form.Control 
+                                as="textarea" 
+                                placeholder="Message"  
+                                value={values.message} 
+                                onChange={handleChang}
+                                name='message'
+                                />
+                            </Form.Group>
+
+                            <Button 
+                            variant="info" 
+                            type="submit" 
+                            className={styles.buttonSend}
+                            onClick={send}
+                            >
                             Send message
                             </Button>
                         </Form>
@@ -48,3 +109,5 @@ export default function Contact(){
 
     );
 }
+
+export default Contact;

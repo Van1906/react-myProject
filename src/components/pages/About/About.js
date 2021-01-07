@@ -47,7 +47,7 @@ export default function About(){
                             </ListGroup.Item>
                             <ListGroup.Item>11. Task's title is a link. 
                                 <li>It switch to <span className='font-italic text-dark'>single task</span> page, where you can see the full task.</li> 
-                                <li>There also has <span className='font-italic text-dark'>Edit</span> and <span className='font-italic text-dark'>Delete buttons.</span></li>
+                                <li>There also has <span className='font-italic text-dark'>Edit</span> and <span className='font-italic text-dark'>Delete</span> buttons.</li>
                             </ListGroup.Item>
                             <ListGroup.Item>12. On about page, you can read information about the project and how to use it.</ListGroup.Item>
                             <ListGroup.Item>13. If you write wrong path, you will be redirect to 404, but dont worry, you always can go back with browser's navigation arrows or Home page.</ListGroup.Item>
