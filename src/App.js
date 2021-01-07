@@ -10,15 +10,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
-
-
-
   return (
     <div>
       <NavMenu />
 
       <Switch>
         <Route path='/' exact component = { ToDo }/>
+        <Route path='/task' exact component = { ToDo }/>
         <Route path='/about' exact component = { About }/>
         <Route path='/task/:id' exact component = { SingleTask }/>
         <Route path='/contact' exact component = { Contact }/>

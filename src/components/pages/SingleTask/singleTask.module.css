@@ -1,8 +1,9 @@
 .task {
-    margin: 20px 100px;
+    margin: 20px auto;
+    max-width: 1112px;
     background: rgb(0 123 255 / 3%)!important;
-    
 }
+
 
 .date {
     font-size: 14px;
@@ -12,17 +13,23 @@
     margin: 5px;
 }
 
+@media (max-width: 1200px) {
+    .task {
+       max-width: 932px;
+    }
+}
+
 
 @media (max-width: 991px) {
  .task {
-    margin: 20px 70px;
+    max-width: 692px;
  }
 }
 
 
 @media (max-width: 768px) {
     .task {
-        margin: 20px 50px;
+        max-width: 512px;
     }
 
     .titleFont {
@@ -33,7 +40,8 @@
 
 @media (max-width: 576px) {
     .task {
-        margin: 20px 30px;
+        margin: 20px 15px;
+        max-width: 100%;
      }
 }
 

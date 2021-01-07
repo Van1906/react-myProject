@@ -201,12 +201,8 @@ class ToDo extends PureComponent{
                         </Col>
                     </Row>
 
-                    <Row>
-                        {tasksArray}
-                    </Row>
-
-                    <Row className='justify-content-center'>
-                        <Col xs={6} md={4} className='text-center'>
+                    <Row className='justify-content-right'>
+                        <Col xs={12} className='text-right'>
                             <Button
                             className = {styles.removeButton}
                             variant="outline-danger"
@@ -215,6 +211,10 @@ class ToDo extends PureComponent{
                             >Remove selected
                             </Button>
                         </Col>
+                    </Row>
+
+                    <Row>
+                        {tasksArray}
                     </Row>
 
                 </Container>

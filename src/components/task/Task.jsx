@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
 import PropTypes from 'prop-types';
-import { dateFormat } from '../../helpers/utils';
+import { dateFormat, descripFormat } from '../../helpers/utils';
 import { Link } from 'react-router-dom';
 
 class Task extends PureComponent {
@@ -48,7 +48,7 @@ class Task extends PureComponent {
                     </Card.Text>
                     <Card.Text 
                     className='font-weight-bold'>
-                    {task.description}
+                    {descripFormat(task.description)}
                     </Card.Text>
                     <Card.Text 
                     className={`${styles.date} text-secondary`}>
