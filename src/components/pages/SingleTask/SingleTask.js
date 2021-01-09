@@ -37,7 +37,6 @@ function SingleTask(props){
     }
   
     const task = props.task;
-
     return(
         <>
             <Container fluid>
