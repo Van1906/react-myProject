@@ -9,9 +9,23 @@
     font-size: 14px;
 }
 
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+} 
+
 .actionButton {
     margin: 5px;
 }
+
+.doneStatus {
+    color: #28a745;
+}
+
+.activeStatus {
+    color: #007bff;
+}
+
 
 @media (max-width: 1200px) {
     .task {
