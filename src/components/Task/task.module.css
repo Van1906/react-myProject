@@ -3,6 +3,10 @@
     background: rgb(0 123 255 / 3%)!important;
 }
 
+.task > div {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .actionButton {
     margin: 5px;
 }
@@ -11,8 +15,13 @@
     border: 1px solid red;
 }
 
+.selected > div {
+    box-shadow: #ff000024 0px 7px 29px 0px;
+}
+
 .date {
     font-size: 14px;
+    margin-bottom: 0;
 }
 
 .checkbox {
@@ -22,6 +31,7 @@
 .actionButtons {
     display: flex;
     justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .doneStatus {
@@ -31,3 +41,4 @@
 .activeStatus {
     color: #007bff;
 }
+
