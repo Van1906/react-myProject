@@ -37,7 +37,7 @@ function Task(props){
                         <Link 
                         to={`/task/${task._id}`} 
                         className="text-info text-decoration-none">
-                        <h5>{trimString(task.title, 20)}</h5>
+                        <h5>{trimString(task.title.toUpperCase(), 20)}</h5>
                         </Link>
                     </Card.Title>
                     <Card.Text 
@@ -45,9 +45,10 @@ function Task(props){
                     Description: 
                     </Card.Text>
                     <Card.Text 
-                    className='font-weight-bold'>
+                    className='font-weight-bold text-dark'>
                     {trimString(task.description, 50)}
                     </Card.Text>
+                    <div class="dropdown-divider"></div>
                     <Card.Text 
                     className={styles.date}>
                     <span className={`text-secondary font-italic`}>Status: </span>
@@ -67,6 +68,7 @@ function Task(props){
                             variant="primary" 
                             className={styles.actionButton}
                             onClick={()=>props.changeTaskStatus(task._id, {status: 'done'}, 'tasks')}
+                            disabled = {disabled}
                             >
                             <FontAwesomeIcon icon={faHistory}/>  
                             </Button> :
@@ -74,6 +76,7 @@ function Task(props){
                             variant="success" 
                             className={styles.actionButton}
                             onClick={()=>props.changeTaskStatus(task._id, {status: 'active'}, 'tasks')}
+                            disabled = {disabled}
                             >
                             <FontAwesomeIcon icon={faCheck}/>  
                             </Button>

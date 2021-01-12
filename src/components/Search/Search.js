@@ -189,6 +189,7 @@ function Search(props){
                     onChange={(event)=>setSearch(event.target.value)}
                     />
                     <Button 
+                    className={styles.searchBtn}
                     variant="secondary"
                     onClick = {handleSubmit}
                     >

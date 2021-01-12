@@ -39,24 +39,26 @@ function SingleTask(props){
     const task = props.task;
     return(
         <>
-            <Container fluid>
+            <Container>
                 <Row className='justify-content-center'>
                     <Col xs={12}>
+                    <div className={`${styles.full} ml-5 font-italic text-secondary`}>The task's full information: </div>
                     {!!task ?
                         <div >
                             <Card className={styles.task}>
                                 <Card.Body>
                                     <Card.Title>
-                                    <h3 className={`${styles.titleFont} text-info`} >{task.title}</h3>
+                                    <h3 className={`${styles.titleFont} text-info`} >{task.title.toUpperCase()}</h3>
                                     </Card.Title>
                                     <Card.Text 
                                     className='font-italic mb-0'>
                                     Description: 
                                     </Card.Text>
                                     <Card.Text 
-                                    className='font-weight-bold'>
+                                    className='font-weight-bold text-dark'>
                                     {task.description}
                                     </Card.Text>
+                                    <div class="dropdown-divider"></div>
                                     <Card.Text 
                                     className={styles.date}>
                                     <span className={`text-secondary font-italic`}>Status: </span>
