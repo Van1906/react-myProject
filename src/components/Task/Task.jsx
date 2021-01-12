@@ -1,13 +1,13 @@
 import React, { useState, memo } from 'react';
 import { InputGroup, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faCheck, faHistory } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
 import PropTypes from 'prop-types';
-import { dateFormat, descripFormat } from '../../helpers/utils';
+import { dateFormat, trimString } from '../../helpers/utils';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {removeTask} from '../../store/actions';
+import { removeTask, changeTaskStatus } from '../../store/actions';
 
 function Task(props){
 
@@ -37,7 +37,7 @@ function Task(props){
                         <Link 
                         to={`/task/${task._id}`} 
                         className="text-info text-decoration-none">
-                        <h5>{task.title}</h5>
+                        <h5>{trimString(task.title, 20)}</h5>
                         </Link>
                     </Card.Title>
                     <Card.Text 
@@ -46,7 +46,12 @@ function Task(props){
                     </Card.Text>
                     <Card.Text 
                     className='font-weight-bold'>
-                    {descripFormat(task.description)}
+                    {trimString(task.description, 50)}
+                    </Card.Text>
+                    <Card.Text 
+                    className={styles.date}>
+                    <span className={`text-secondary font-italic`}>Status: </span>
+                    <span className={`${task.status==='active' ? styles.activeStatus: styles.doneStatus}`}>{task.status}</span>
                     </Card.Text>
                     <Card.Text 
                     className={`${styles.date} text-secondary`}>
@@ -55,23 +60,43 @@ function Task(props){
                     <Card.Text className={`${styles.date} text-secondary`}>
                     <span className='font-italic'>Created at:</span> {dateFormat(task.created_at)}
                     </Card.Text>
-                    <Button 
-                    variant="warning" 
-                    className={styles.actionButton}
-                    onClick={()=>props.onEdit(task)}
-                    disabled = {disabled}
-                    >
-                    <FontAwesomeIcon icon={faEdit}/>  
-                    </Button>
+                    <div className={styles.actionButtons}>
+                        {
+                            task.status === 'active' ?
+                            <Button 
+                            variant="primary" 
+                            className={styles.actionButton}
+                            onClick={()=>props.changeTaskStatus(task._id, {status: 'done'}, 'tasks')}
+                            >
+                            <FontAwesomeIcon icon={faHistory}/>  
+                            </Button> :
+                            <Button 
+                            variant="success" 
+                            className={styles.actionButton}
+                            onClick={()=>props.changeTaskStatus(task._id, {status: 'active'}, 'tasks')}
+                            >
+                            <FontAwesomeIcon icon={faCheck}/>  
+                            </Button>
+                        }
 
-                    <Button 
-                    variant="danger" 
-                    className={styles.actionButton}
-                    onClick={()=>props.removeTask(task._id)}
-                    disabled = {disabled}
-                    >
-                    <FontAwesomeIcon icon={faTrash}/>   
-                    </Button>
+                        <Button 
+                        variant="warning" 
+                        className={styles.actionButton}
+                        onClick={()=>props.onEdit(task)}
+                        disabled = {disabled}
+                        >
+                        <FontAwesomeIcon icon={faEdit}/>  
+                        </Button>
+
+                        <Button 
+                        variant="danger" 
+                        className={styles.actionButton}
+                        onClick={()=>props.removeTask(task._id)}
+                        disabled = {disabled}
+                        >
+                        <FontAwesomeIcon icon={faTrash}/>   
+                        </Button>
+                    </div>
                 </Card.Body>
             </Card>
             </>
@@ -86,10 +111,12 @@ Task.propTypes = {
     data: PropTypes.object.isRequired,
     onCheck: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
+    onEdit: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = {
-    removeTask
+    removeTask,
+    changeTaskStatus
 };
 
 export default connect(null, mapDispatchToProps)(memo(Task));

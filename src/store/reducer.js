@@ -57,7 +57,6 @@ const defaultState = {
             return {
                 ...state,
                 task: null,
-                // tasks: [],
                 loading: false,
                 successMessage: 'Task removed successfully!!!',
             };
@@ -96,6 +95,40 @@ const defaultState = {
                 editTaskSuccess: true,
                 tasks:tasks,
                 successMessage: 'Task edited successfully!!!',
+            };
+        }
+    }
+
+    case actionTypes.CHANGE_TASK_STATUS_SUCCESS : {
+        let message;
+        if(action.task.status === 'done') {
+            message = 'Congradulations, task completed!!!';
+        }
+        else {
+            message = 'The task is active now!!!';
+        }
+
+        if(action.from === 'single') {
+            return {
+                ...state,
+                loading: false,
+                editTaskSuccess: true,
+                task: action.task,
+                successMessage: message,
+            };
+        }
+        else {
+            const tasks = [...state.tasks];
+            const foundTaskIndex = tasks.findIndex((task) => task._id === action.task._id);
+    
+            tasks[foundTaskIndex] = action.task;
+
+            return {
+                ...state,
+                loading: false,
+                editTaskSuccess: true,
+                tasks:tasks,
+                successMessage: message,
             };
         }
     }

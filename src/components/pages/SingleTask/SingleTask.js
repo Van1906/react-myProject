@@ -5,9 +5,9 @@ import EditModal from '../../EditModal/EditModal'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import styles from './singleTask.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faCheck, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import {getSingleTask, removeTask} from '../../../store/actions';
+import {getSingleTask, removeTask, changeTaskStatus} from '../../../store/actions';
 
 
 
@@ -58,27 +58,51 @@ function SingleTask(props){
                                     {task.description}
                                     </Card.Text>
                                     <Card.Text 
+                                    className={styles.date}>
+                                    <span className={`text-secondary font-italic`}>Status: </span>
+                                    <span className={`${task.status==='active' ? styles.activeStatus: styles.doneStatus}`}>{task.status}</span>
+                                    </Card.Text>
+                                    <Card.Text 
                                     className={`${styles.date} text-secondary mb-0`}>
                                     <span className='font-italic'>Date:</span> {dateFormat(task.date)}
                                     </Card.Text>
                                     <Card.Text className={`${styles.date} text-secondary`}>
                                     <span className='font-italic'>Created at:</span> {dateFormat(task.created_at)}
                                     </Card.Text>
-                                    <Button 
-                                    variant="warning" 
-                                    className={styles.actionButton}
-                                    onClick={toggleEditModal}
-                                    >
-                                    <FontAwesomeIcon icon={faEdit}/>  
-                                    </Button>
+                                    <div className={styles.actionButtons}>
+                                    {
+                                        task.status === 'active' ?
+                                        <Button 
+                                        variant="primary" 
+                                        className={styles.actionButton}
+                                        onClick={()=>props.changeTaskStatus(task._id, {status: 'done'}, 'single')}
+                                        >
+                                        <FontAwesomeIcon icon={faHistory}/>  
+                                        </Button> :
+                                        <Button 
+                                        variant="success" 
+                                        className={styles.actionButton}
+                                        onClick={()=>props.changeTaskStatus(task._id, {status: 'active'}, 'single')}
+                                        >
+                                        <FontAwesomeIcon icon={faCheck}/>  
+                                        </Button>
+                                    }
+                                        <Button 
+                                        variant="warning" 
+                                        className={styles.actionButton}
+                                        onClick={toggleEditModal}
+                                        >
+                                        <FontAwesomeIcon icon={faEdit}/>  
+                                        </Button>
 
-                                    <Button 
-                                    variant="danger" 
-                                    className={styles.actionButton}
-                                    onClick={()=>props.removeTask(task._id, 'single', redirectHome)}
-                                    >
-                                    <FontAwesomeIcon icon={faTrash}/>   
-                                    </Button>
+                                        <Button 
+                                        variant="danger" 
+                                        className={styles.actionButton}
+                                        onClick={()=>props.removeTask(task._id, 'single', redirectHome)}
+                                        >
+                                        <FontAwesomeIcon icon={faTrash}/>   
+                                        </Button>
+                                    </div>
                                 </Card.Body>
                             </Card>
                         </div> :
@@ -109,7 +133,9 @@ const mapStateToProps = state => ({
   
 const mapDispatchToProps = {
     getSingleTask,
-    removeTask
+    removeTask,
+    changeTaskStatus
+    
 };
   
   export default connect(mapStateToProps, mapDispatchToProps)(memo(SingleTask));

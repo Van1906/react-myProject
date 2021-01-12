@@ -19,3 +19,15 @@
     justify-content: flex-end;
 }
 
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.doneStatus {
+    color: #28a745;
+}
+
+.activeStatus {
+    color: #007bff;
+}
