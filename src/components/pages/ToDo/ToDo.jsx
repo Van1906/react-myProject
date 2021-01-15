@@ -143,7 +143,6 @@ class ToDo extends PureComponent{
                     <EditModal
                     data = {editTask} 
                     from = 'tasks'
-                    // onSave = {this.saveEditTask}
                     onClose = {()=>this.toggleEditModal(null)}
                     />
                 }

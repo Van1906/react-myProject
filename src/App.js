@@ -8,6 +8,7 @@ import Contact from './components/pages/Contact/Contact';
 import SingleTask from './components/pages/SingleTask/SingleTask';
 import NotFound from './components/pages/NotFound/NotFound';
 import NavMenu from './components/NavMenu/NavMenu';
+import Footer from './components/Footer/Footer';
 import Spinner from './components/Spinner/Spinner'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -39,6 +40,8 @@ function App(props) {
         <Redirect to='/404'/>
       </Switch>
     </div>
+
+    <Footer />
 
     <ToastContainer
     position="bottom-left"

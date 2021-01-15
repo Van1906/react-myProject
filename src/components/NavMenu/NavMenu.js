@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './navMenu.module.css';
 export default function NavMenu(){
     return(
-        <Navbar expand="lg" className={styles.navBar}>
+        <Navbar expand="lg" className={`${styles.navBar} sticky-top`}>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav" className={'justify-content-center'}>
           <Nav className={styles.navCollapse}>

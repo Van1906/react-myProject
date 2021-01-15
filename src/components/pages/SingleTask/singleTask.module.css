@@ -1,6 +1,5 @@
 .task {
     margin: 20px auto;
-    /* max-width: 1112px; */
     background: rgb(0 123 255 / 3%)!important;
 }
 
@@ -38,37 +37,6 @@
 }
 
 
-@media (max-width: 1200px) {
-    /* .task {
-       max-width: 932px;
-    } */
-}
-
-
-@media (max-width: 991px) {
- /* .task {
-    max-width: 692px;
- } */
-}
-
-
-@media (max-width: 768px) {
-    /* .task {
-        max-width: 512px;
-    } */
-
-    /* .titleFont {
-        font-size: 25px;
-    } */
-}
-
-
-@media (max-width: 576px) {
-    /* .task {
-        margin: 20px 15px;
-        max-width: 100%;
-     } */
-}
 
 
 

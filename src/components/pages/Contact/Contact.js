@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,15 @@ const defaultvalues = {
 };
 
 
+
+
  function Contact(){
+    const nameRef = useRef(null);
+
+    useEffect(()=>{
+        nameRef.current.focus();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const [values, setvalues] = useState({
         defaultvalues
@@ -58,6 +66,7 @@ const defaultvalues = {
                                 value={values.name} 
                                 onChange={handleChang}
                                 name='name'
+                                ref = {nameRef}
                                 />
                             </Form.Group>
 

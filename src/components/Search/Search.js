@@ -198,28 +198,6 @@ function Search(props){
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
-
-            {/* <div> 
-                {
-                    dateOptions.map((item, index)=>{
-                        return (
-                            <div key = {index}>
-                                <span>{item.label} </span>
-                                <DatePicker
-                                // className = {styles.date}
-                                selected={dates[item.value]}
-                                onChange={(date)=>{
-                                    setDates({
-                                        ...dates,
-                                        [item.value]: date
-                                    })
-                                }} 
-                                />
-                            </div>
-                        )
-                    })
-                }
-            </div> */}
         </div>
     )
 }

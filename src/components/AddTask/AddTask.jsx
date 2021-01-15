@@ -52,7 +52,6 @@ class Addtask extends Component {
             date: dateFormat(date.toISOString())
         }
 
-        // this.props.onAdd(task);
         this.props.addTask(task);
 
     };
