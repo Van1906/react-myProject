@@ -107,9 +107,6 @@ function Task(props){
 };
 
 
-
-
-
 Task.propTypes = {
     data: PropTypes.object.isRequired,
     onCheck: PropTypes.func.isRequired,

@@ -23,16 +23,12 @@ export default function NotFound(){
                 <NavLink 
                 to ='/' 
                 exact 
-                // activeClassName={styles.activePage}
-                // className={styles.navLink}
                 className={`${styles.goBack} text-danger mb-0`}
                 >
                 Home 
                 </NavLink>
                  page, please.
                 </p>
-
-
             </div>
         </div>
     );
