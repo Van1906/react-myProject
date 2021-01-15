@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedinIn, faGithub} from '@fortawesome/free-brands-svg-icons';
 import { faHome, faAddressCard, faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
-
-
 import styles from './footer.module.css';
 
 export default function Footer(){
