@@ -120,11 +120,12 @@ export function removeSelected(taskIds){
 
 
 export function send(data){
+    console.log('kuku');
     return (dispatch)=>{
         dispatch({type: actionTypes.LOADING});
 
         request(`${apiUrl}/form`, 'POST', data)
-        .then(res=>{
+        .then(()=>{
             dispatch({type: actionTypes.SEND_FORM_SUCCESS});
         })
         .catch(err =>{
