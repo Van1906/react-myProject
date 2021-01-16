@@ -8,6 +8,8 @@ const defaultState = {
     addTaskSuccess: false,
     removeTasksSuccess: false,
     editTaskSuccess: false,
+    sendFormSuccess: false,
+    form: [],
     loading: false,
   };
   
@@ -154,6 +156,15 @@ const defaultState = {
             ...state,
             task: action.task,
             loading: false
+        };
+    }
+
+    case actionTypes.SEND_FORM_SUCCESS : {
+        return {
+            ...state,
+            loading: false,
+            successMessage: 'Form sent successfully!!!',
+            sendFormSuccess: true
         };
     }
 

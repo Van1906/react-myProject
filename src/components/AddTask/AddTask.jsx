@@ -16,7 +16,8 @@ class Addtask extends Component {
         this.state = {
             title : '',
             description: '',
-            date: new Date()
+            date: new Date(),
+            titleRequiredShown: false
         }
 
         this.titleRef = React.createRef(null)
@@ -43,6 +44,10 @@ class Addtask extends Component {
     addTask = () =>{
         const {title, description, date} = this.state;
         if(!title) {
+            this.setState({
+                titleRequiredShown: true
+            });
+            // this.titleRef.current.focus();
             return;
         }
 
@@ -64,7 +69,7 @@ class Addtask extends Component {
 
     render() {
         const {onClose} = this.props;
-
+        const {titleRequiredShown} = this.state;
         return(
             <Modal 
             show={true} 
@@ -79,12 +84,15 @@ class Addtask extends Component {
                 </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>Title is required!!!</div>
                     <FormControl
                     placeholder="Title"
                     name = 'title'
                     onChange={this.handleChange}
                     onKeyDown={this.handleKeyDown}
                     ref = {this.titleRef}
+                    required = {true}
+                    disabled
                     />
                     <FormControl 
                     as="textarea" 

@@ -14,7 +14,8 @@ class EditModal extends Component {
     const {date}= props.data;
     this.state = {
       ...props.data,
-      date: date ? new Date(props.data.date): new Date()
+      date: date ? new Date(props.data.date): new Date(),
+      titleRequiredShown: false
     }
     this.titleRef = createRef(null);
   };
@@ -39,6 +40,10 @@ class EditModal extends Component {
   handleSave = ()=> {
     const {title, date} = this.state;
     if(!title) {
+      this.setState({
+        titleRequiredShown: true
+      });
+      this.titleRef.current.focus();
       return
     }
 
@@ -58,6 +63,7 @@ class EditModal extends Component {
 
   render(){
     const {title, description, date} = this.state;
+    const {titleRequiredShown} = this.state;
     return (
       <Modal 
       show={true} 
@@ -72,6 +78,7 @@ class EditModal extends Component {
         </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>Title is required!!!</div>
         <FormControl
         name = 'title'
         value = {title}

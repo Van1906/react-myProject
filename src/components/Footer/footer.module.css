@@ -1,6 +1,7 @@
 .footerContainer {
     padding-top: 20px;
     padding-bottom: 20px;
+    margin-top:85px;
 
 }
 
@@ -27,7 +28,8 @@
     border-radius: 50%;
     margin: 0 10px;
     transition: all .2s ease-out;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.75);
+    
 }
 
 .socialIconsLi a {

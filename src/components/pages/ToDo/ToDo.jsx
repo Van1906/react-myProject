@@ -97,9 +97,9 @@ class ToDo extends PureComponent{
         });
 
         return (
-            <div className={styles.todoWrapper}>
+            <>
                 <Container>
-                <Search />
+                    <Search />
                     <Row className='justify-content-center text-center'> 
                         <Col xs={12} sm={10} md={8} lg={6}>
                             <Button 
@@ -126,7 +126,6 @@ class ToDo extends PureComponent{
                     <Row>
                         {tasksArray}
                     </Row>
-
                 </Container>
 
                 {
@@ -153,9 +152,9 @@ class ToDo extends PureComponent{
                     onClose = {this.toggleNewTaskModal}
                     />
                 }
-
-            </div>
+            </>
         )
+        
     };
 };
 

@@ -2,26 +2,29 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons';
+import {connect} from 'react-redux';
+import {send} from '../../../store/actions';
 import styles from './contact.module.css'
 
 
 const defaultvalues = {
     name: '',
     email: '',
-    phone: '',
     message: ''
 };
 
-
-
-
  function Contact(){
     const nameRef = useRef(null);
+
+    const [titleRequiredShown, setTitleRequiredShown] = useState(false);
+    
 
     useEffect(()=>{
         nameRef.current.focus();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    
 
     const [values, setvalues] = useState({
         defaultvalues
@@ -35,14 +38,47 @@ const defaultvalues = {
         })
     };
 
-    const send = ()=>{
-        console.log('values', values);
+    const handleSubmit = (e) => {
+        console.log(e);
+        e.preventDefault();
+        const {email, massage} = values;
+        if(!email || !massage) {
+            setTitleRequiredShown(!titleRequiredShown);
+            return;
+        }
+        console.log(values);
+        
+        send(values);
+        
         setvalues(defaultvalues);
-    }
+      };
+
+    // const send = (name, email, message)=>{
+    //     // e.preventDefault();
+    //     // if(!name || !email || !message) {
+
+    //     //     setTitleRequiredShown(!titleRequiredShown);
+
+    //     //     this.titleRef.current.focus();
+    //     //     return;
+    //     // }
+
+    //     const form = {
+    //         name,
+    //         email,
+    //         message
+    //     }
+
+    //     send(form);
+
+        
+    // }
+
 
 
     return(
         <>
+        
         <Container className={styles.wrapper}>
             <Row className={styles.rowWrapper}>
                 <Col sm={4} className={`${styles.message} ${styles.first}`}>
@@ -70,6 +106,7 @@ const defaultvalues = {
                                 />
                             </Form.Group>
 
+                            <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div>
                             <Form.Group>
                                 <Form.Control 
                                 type="email" 
@@ -80,16 +117,7 @@ const defaultvalues = {
                                 />
                             </Form.Group>
 
-                            <Form.Group>
-                                <Form.Control 
-                                type="phone" 
-                                placeholder="Your phone number" 
-                                value={values.phone} 
-                                onChange={handleChang}
-                                name='phone'
-                                />
-                            </Form.Group>
-
+                            <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div>
                             <Form.Group>
                                 <Form.Control 
                                 as="textarea" 
@@ -104,7 +132,7 @@ const defaultvalues = {
                             variant="info" 
                             type="submit" 
                             className={styles.buttonSend}
-                            onClick={send}
+                            onClick={()=>handleSubmit}
                             >
                             Send message
                             </Button>
@@ -119,4 +147,10 @@ const defaultvalues = {
     );
 }
 
-export default Contact;
+
+const mapDispatchToProps = {
+    send
+};
+
+
+export default connect(null, mapDispatchToProps)(Contact);
