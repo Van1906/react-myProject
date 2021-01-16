@@ -16,7 +16,7 @@ const defaultvalues = {
  function Contact(props){
     const nameRef = useRef(null);
 
-    const [titleRequiredShown, setTitleRequiredShown] = useState(false);
+    // const [titleRequiredShown, setTitleRequiredShown] = useState(false);
     
 
     useEffect(()=>{
@@ -40,12 +40,11 @@ const defaultvalues = {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const {email} = values;
-        console.log(email);
-        if(!email) {
-            setTitleRequiredShown(!titleRequiredShown);
-            return;
-        } 
+        // const {email} = values;
+        // if(!email) {
+        //     // setTitleRequiredShown(!titleRequiredShown);
+        //     return;
+        // } 
         
         props.send(values);
         setvalues(defaultvalues);
@@ -82,7 +81,7 @@ const defaultvalues = {
                                 />
                             </Form.Group>
 
-                            <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div>
+                            {/* <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div> */}
                             <Form.Group>
                                 <Form.Control 
                                 type="email" 
