@@ -40,15 +40,15 @@ const defaultvalues = {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const {email, massage} = values;
-        if(!email || !massage) {
+        const {email} = values;
+        console.log(email);
+        if(!email) {
             setTitleRequiredShown(!titleRequiredShown);
             return;
         } 
-        else {
-            props.send(values);
-            setvalues(defaultvalues);
-        }
+        
+        props.send(values);
+        setvalues(defaultvalues);
       };
 
 
@@ -93,7 +93,7 @@ const defaultvalues = {
                                 />
                             </Form.Group>
 
-                            <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div>
+                            {/* <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div> */}
                             <Form.Group>
                                 <Form.Control 
                                 as="textarea" 
