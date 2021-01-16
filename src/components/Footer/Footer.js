@@ -13,14 +13,14 @@ export default function Footer(){
                 <Col xs={12} sm={12} md={6}>
                     <ul className={styles.socialIconsUl}>
                         <li className={`${styles.socialIconsLi}`}>
-                            <a href="https://www.linkedin.com/feed/">
+                            <a href="https://www.linkedin.com/feed/" target='_blank' rel="noopener noreferrer"> 
                             <FontAwesomeIcon icon = {faLinkedinIn}/> 
                             </a>
                         
                         </li>
 
                         <li className={`${styles.socialIconsLi}`}>
-                            <a href="https://github.com/Van1906/react-myProject">
+                            <a href="https://github.com/Van1906" target='_blank' rel="noopener noreferrer">
                             <FontAwesomeIcon icon = {faGithub}/> 
                             </a>
                         </li>

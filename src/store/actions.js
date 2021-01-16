@@ -117,3 +117,18 @@ export function removeSelected(taskIds){
         })
     }
 }
+
+
+export function send(data){
+    return (dispatch)=>{
+        dispatch({type: actionTypes.LOADING});
+
+        request(`${apiUrl}/form`, 'POST', data)
+        .then(res=>{
+            dispatch({type: actionTypes.SEND_FORM_SUCCESS});
+        })
+        .catch(err =>{
+            dispatch({type: actionTypes.ERROR, error: err.message});
+        })
+    }
+}
