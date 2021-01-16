@@ -120,7 +120,6 @@ export function removeSelected(taskIds){
 
 
 export function send(data){
-    console.log('kuku');
     return (dispatch)=>{
         dispatch({type: actionTypes.LOADING});
 
