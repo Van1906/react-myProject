@@ -13,7 +13,7 @@ const defaultvalues = {
     message: ''
 };
 
- function Contact(){
+ function Contact(props){
     const nameRef = useRef(null);
 
     const [titleRequiredShown, setTitleRequiredShown] = useState(false);
@@ -39,41 +39,17 @@ const defaultvalues = {
     };
 
     const handleSubmit = (e) => {
-        console.log(e);
         e.preventDefault();
         const {email, massage} = values;
         if(!email || !massage) {
             setTitleRequiredShown(!titleRequiredShown);
             return;
+        } 
+        else {
+            props.send(values);
+            setvalues(defaultvalues);
         }
-        console.log(values);
-        
-        send(values);
-        
-        setvalues(defaultvalues);
       };
-
-    // const send = (name, email, message)=>{
-    //     // e.preventDefault();
-    //     // if(!name || !email || !message) {
-
-    //     //     setTitleRequiredShown(!titleRequiredShown);
-
-    //     //     this.titleRef.current.focus();
-    //     //     return;
-    //     // }
-
-    //     const form = {
-    //         name,
-    //         email,
-    //         message
-    //     }
-
-    //     send(form);
-
-        
-    // }
-
 
 
     return(
@@ -94,7 +70,7 @@ const defaultvalues = {
                     <div className={styles.formBlock}>
                         <h1 className='text-center'>Contact us</h1>
                         <div className={styles.formGroup}>
-                        <Form>
+                        
                             <Form.Group>
                                 <Form.Control 
                                 type="text" 
@@ -132,11 +108,11 @@ const defaultvalues = {
                             variant="info" 
                             type="submit" 
                             className={styles.buttonSend}
-                            onClick={()=>handleSubmit}
+                            onClick={handleSubmit}
                             >
                             Send message
                             </Button>
-                        </Form>
+                        
                         </div>
                     </div>
                 </Col>

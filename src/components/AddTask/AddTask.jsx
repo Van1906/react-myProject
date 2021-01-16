@@ -47,7 +47,7 @@ class Addtask extends Component {
             this.setState({
                 titleRequiredShown: true
             });
-            // this.titleRef.current.focus();
+            this.titleRef.current.focus();
             return;
         }
 
@@ -92,7 +92,6 @@ class Addtask extends Component {
                     onKeyDown={this.handleKeyDown}
                     ref = {this.titleRef}
                     required = {true}
-                    disabled
                     />
                     <FormControl 
                     as="textarea" 
