@@ -10,14 +10,19 @@ import styles from './contact.module.css'
 const defaultvalues = {
     name: '',
     email: '',
-    message: ''
+    message: '',
+    nameError: '',
+    emailError: '',
+    messageError: ''
 };
+
 
  function Contact(props){
     const nameRef = useRef(null);
 
-    // const [titleRequiredShown, setTitleRequiredShown] = useState(false);
-    
+    const [nameRequiredShown, setNameRequiredShown] = useState(false);
+    const [emailRequiredShown, setEmailRequiredShown] = useState(false);
+    const [messageRequiredShown, setMessageRequiredShown] = useState(false);
 
     useEffect(()=>{
         nameRef.current.focus();
@@ -34,21 +39,60 @@ const defaultvalues = {
         setvalues({
             ...values,
             [name]: value
-
         })
+    };
+
+    const validate = () =>{
+        const {name, email, message} = values;
+        let nameError = '';
+        let emailError = '';
+        let messageError ='';
+
+        if(!name) {
+            setNameRequiredShown(true);
+            nameError = 'Fill the name field, please !!!';
+           
+        }
+
+        if(!email) {
+            setEmailRequiredShown(true);
+            emailError = 'Fill the email field, please !!!';
+        }
+
+        else if(!email.includes('@')) {
+            setEmailRequiredShown(true);
+            emailError = 'Invalid Email !!!';
+        }
+
+        if(!message) {
+            setMessageRequiredShown(true);
+            messageError = 'Fill the message field, please !!!';
+           
+        }
+
+        if(nameError || emailError || messageError) {
+            setvalues({
+                ...values,
+                nameError,
+                emailError,
+                messageError
+            });
+
+            return false;
+        }
+
+        return true;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const {email} = values;
-        // if(!email) {
-        //     // setTitleRequiredShown(!titleRequiredShown);
-        //     return;
-        // } 
-        
-        props.send(values);
-        setvalues(defaultvalues);
-      };
+        const isValid = validate();
+        if(isValid) {
+            props.send(values);
+            setvalues(defaultvalues);
+            nameRef.current.focus();
+        }
+    };
 
 
     return(
@@ -70,6 +114,7 @@ const defaultvalues = {
                         <h1 className='text-center'>Contact us</h1>
                         <div className={styles.formGroup}>
                         
+                            <div className={nameRequiredShown ? styles.showRequired : styles.hideRequired}>{values.nameError}</div>
                             <Form.Group>
                                 <Form.Control 
                                 type="text" 
@@ -81,7 +126,7 @@ const defaultvalues = {
                                 />
                             </Form.Group>
 
-                            {/* <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div> */}
+                            <div className={emailRequiredShown ? styles.showRequired : styles.hideRequired}>{values.emailError}</div>      
                             <Form.Group>
                                 <Form.Control 
                                 type="email" 
@@ -92,7 +137,7 @@ const defaultvalues = {
                                 />
                             </Form.Group>
 
-                            {/* <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>All fields are required!!!</div> */}
+                            <div className={messageRequiredShown ? styles.showRequired : styles.hideRequired}>{values.messageError}</div>
                             <Form.Group>
                                 <Form.Control 
                                 as="textarea" 

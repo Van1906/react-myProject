@@ -78,7 +78,7 @@ class EditModal extends Component {
         </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>Title is required!!!</div>
+        <div className={titleRequiredShown ? styles.showRequired : styles.hideRequired}>Title is required !!!</div>
         <FormControl
         name = 'title'
         value = {title}
