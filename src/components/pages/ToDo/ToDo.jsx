@@ -21,25 +21,25 @@ class ToDo extends PureComponent{
 
     componentDidMount(){
         this.props.getTasks();
-    }
+    };
 
     componentDidUpdate(prevProps){
         if(!prevProps.addTaskSuccess && this.props.addTaskSuccess){
             this.toggleNewTaskModal();
-        }
+        };
 
         if(!prevProps.removeTasksSuccess && this.props.removeTasksSuccess){
             this.setState({
                 selectedTasks: new Set(),
                 showConfirm: false
             });
-        }
+        };
 
         if(!prevProps.editTaskSuccess && this.props.editTaskSuccess){
             this.setState({
                 editTask: null
             });
-        }
+        };
     }
 
 
@@ -59,24 +59,24 @@ class ToDo extends PureComponent{
     removeSelected = ()=> {
         const taskIds = [...this.state.selectedTasks];
         this.props.removeSelected(taskIds);
-    }
+    };
 
     toggleConfirm = ()=> {
         this.setState({
             showConfirm: !this.state.showConfirm
         });
-    }
+    };
 
     toggleEditModal = (task)=> {
         this.setState({
-            editTask: task,
+            editTask: task
         });
-    }
+    };
 
     toggleNewTaskModal = ()=> {
         this.setState({
             openNewTaskModal: !this.state.openNewTaskModal
-        })
+        });
     }
 
     render() {
@@ -90,10 +90,9 @@ class ToDo extends PureComponent{
                     onCheck={this.handleCheck}
                     onEdit = {this.toggleEditModal}
                     disabled = {!!selectedTasks.size}
-
                     />
                 </Col>
-            )
+            );
         });
 
         return (
@@ -153,7 +152,7 @@ class ToDo extends PureComponent{
                     />
                 }
             </>
-        )
+        );
         
     };
 };

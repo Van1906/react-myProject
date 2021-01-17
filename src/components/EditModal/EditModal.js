@@ -16,13 +16,13 @@ class EditModal extends Component {
       ...props.data,
       date: date ? new Date(props.data.date): new Date(),
       titleRequiredShown: false
-    }
+    };
     this.titleRef = createRef(null);
   };
 
   componentDidMount(){
     this.titleRef.current.focus();
-  }
+  };
 
   handleEdit = (event)=>{
     const {name, value} = event.target;
@@ -34,7 +34,7 @@ class EditModal extends Component {
   handleKeyUp = (event)=>{
     if(event.key === 'Enter') {
         this.handleSave();
-    }
+    };
   };
 
   handleSave = ()=> {
@@ -44,13 +44,13 @@ class EditModal extends Component {
         titleRequiredShown: true
       });
       this.titleRef.current.focus();
-      return
-    }
+      return;
+    };
 
     const editedTask = {
       ...this.state,
       date: dateFormat(date.toISOString())
-    }
+    };
 
     this.props.saveEditTask(editedTask, this.props.from);
   };
@@ -118,7 +118,7 @@ class EditModal extends Component {
         </Modal.Footer>
       </Modal>
     );
-  }
+  };
 
 };
 

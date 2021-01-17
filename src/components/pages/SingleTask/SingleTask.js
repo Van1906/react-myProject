@@ -33,7 +33,6 @@ function SingleTask(props){
 
     const toggleEditModal = ()=>{
         setOpenEditModal(!openEditModal);
-        
     }
   
     const task = props.task;
@@ -123,8 +122,8 @@ function SingleTask(props){
                 </Row>
             </Container>
         </>
-    )
-}
+    );
+};
 
 
 const mapStateToProps = state => ({
@@ -137,7 +136,6 @@ const mapDispatchToProps = {
     getSingleTask,
     removeTask,
     changeTaskStatus
-    
 };
   
   export default connect(mapStateToProps, mapDispatchToProps)(memo(SingleTask));

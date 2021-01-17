@@ -13,14 +13,22 @@ export default function Footer(){
                 <Col xs={12} sm={12} md={6}>
                     <ul className={styles.socialIconsUl}>
                         <li className={`${styles.socialIconsLi}`}>
-                            <a href="https://www.linkedin.com/feed/" target='_blank' rel="noopener noreferrer"> 
+                            <a 
+                            href="https://www.linkedin.com/feed/" 
+                            target='_blank' 
+                            rel="noopener noreferrer"
+                            > 
                             <FontAwesomeIcon icon = {faLinkedinIn}/> 
                             </a>
                         
                         </li>
 
                         <li className={`${styles.socialIconsLi}`}>
-                            <a href="https://github.com/Van1906" target='_blank' rel="noopener noreferrer">
+                            <a 
+                            href="https://github.com/Van1906" 
+                            target='_blank' 
+                            rel="noopener noreferrer"
+                            >
                             <FontAwesomeIcon icon = {faGithub}/> 
                             </a>
                         </li>
@@ -72,12 +80,10 @@ export default function Footer(){
                 <Col xs={12} sm={12} md={6}>
                     <div className={`${styles.copyRight} font-italic`}>
                         <span>CopyRight &#169; V.Kh 2020</span>
-                        
                         <span>All rights reserved</span>
                     </div>
                 </Col>
             </Row>
         </Container>
-        
     );
-}
+};

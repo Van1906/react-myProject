@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import {send} from '../../../store/actions';
-import styles from './contact.module.css'
+import styles from './contact.module.css';
 
 
 const defaultvalues = {
@@ -37,10 +37,11 @@ const defaultvalues = {
         setvalues({
             ...values,
             [name]: value
-        })
+        });
     };
 
     const validate = () =>{
+        
         const {name, email, message} = values;
         let nameError = '';
         let emailError = '';
@@ -49,24 +50,23 @@ const defaultvalues = {
         if(!name) {
             setNameRequiredShown(true);
             nameError = 'Fill the name field, please !!!';
-           
-        }
+        };
+
+        
+        // if(!email.includes('@')) {
+        //     setEmailRequiredShown(true);
+        //     emailError = 'Write valid email, please !!!';
+        // };
 
         if(!email) {
             setEmailRequiredShown(true);
             emailError = 'Fill the email field, please !!!';
-        }
-
-        else if(!email.includes('@')) {
-            setEmailRequiredShown(true);
-            emailError = 'Invalid email !!!';
-        }
+        };
 
         if(!message) {
             setMessageRequiredShown(true);
             messageError = 'Fill the message field, please !!!';
-           
-        }
+        };
 
         if(nameError || emailError || messageError) {
             setvalues({
@@ -77,7 +77,7 @@ const defaultvalues = {
             });
 
             return false;
-        }
+        };
 
         return true;
     };
@@ -89,7 +89,7 @@ const defaultvalues = {
             props.send(values);
             setvalues(defaultvalues);
             nameRef.current.focus();
-        }
+        };
     };
 
 
@@ -161,7 +161,7 @@ const defaultvalues = {
         </>
 
     );
-}
+};
 
 
 const mapDispatchToProps = {

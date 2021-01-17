@@ -16,7 +16,6 @@ function request(url, method='GET', body){
             if(response.error) {
                 throw response.error;
             }
-
             return response;
         });
 };

@@ -18,15 +18,14 @@ class Addtask extends Component {
             description: '',
             date: new Date(),
             titleRequiredShown: false
-        }
+        };
 
-        this.titleRef = React.createRef(null)
-    }
+        this.titleRef = React.createRef(null);
+    };
 
     componentDidMount(){
         this.titleRef.current.focus();
-      }
-
+    };
 
     handleChange = (event)=>{
         const {name, value} = event.target;
@@ -38,8 +37,8 @@ class Addtask extends Component {
     handleKeyDown = (event)=>{
         if(event.key === 'Enter') {
             this.addTask();
-        }
-    }
+        };
+    };
 
     addTask = () =>{
         const {title, description, date} = this.state;
@@ -49,13 +48,13 @@ class Addtask extends Component {
             });
             this.titleRef.current.focus();
             return;
-        }
+        };
 
         const task = {
             title,
             description,
             date: dateFormat(date.toISOString())
-        }
+        };
 
         this.props.addTask(task);
 
@@ -122,8 +121,8 @@ class Addtask extends Component {
                 </Button>
                 </Modal.Footer>
             </Modal>
-        )
-    }
+        );
+    };
 };
 
 Addtask.propTypes = {

@@ -64,15 +64,13 @@ const defaultState = {
             };
         }
         
-            const newTasks = state.tasks.filter(task => task._id !== action.taskId);
-            return {
-                ...state,
-                tasks: newTasks,
-                loading: false,
-                successMessage: 'Task removed successfully!!!',
-            };
-        
-
+        const newTasks = state.tasks.filter(task => task._id !== action.taskId);
+        return {
+            ...state,
+            tasks: newTasks,
+            loading: false,
+            successMessage: 'Task removed successfully!!!',
+        };
     }
 
     case actionTypes.EDIT_TASK_SUCCESS : {

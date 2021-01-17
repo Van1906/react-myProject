@@ -36,4 +36,4 @@ export default function NavMenu(){
         </Navbar.Collapse>
       </Navbar>
     );
-}
+};
