@@ -38,7 +38,7 @@ function SingleTask(props){
     const task = props.task;
     return(
         <>
-            <Container>
+            <Container className={styles.main}>
                 <Row className='justify-content-center'>
                     <Col xs={12}>
                     <div className={`${styles.full} ml-5 font-italic text-secondary`}>The task's full information: </div>

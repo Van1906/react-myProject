@@ -20,7 +20,7 @@
 .actionButtons {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: 18px;
 } 
 
 .actionButton {
@@ -35,6 +35,17 @@
     color: #007bff;
 }
 
+
+.main {
+    min-height: calc(100vh - 311px);
+}
+
+@media (max-width: 991px) {
+    .main {
+        min-height: calc(100vh - 307px);
+    }
+    
+}
 
 
 

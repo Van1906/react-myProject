@@ -4,9 +4,9 @@ import styles from './about.module.css';
 export default function About(){
     return(
         <>
-        <Container>
+        <Container className={styles.main}>
             <Row>
-                <Col className={styles.colStyle}>
+                <Col>
                     <div className={`${styles.titleBlock} text-center `}>
                         <h1 className={styles.aboutTitle}>React.js project created with create-react-app</h1>
                         <h4 className={`text-info`}>The Project is <span className={styles.todo}>ToDo List</span>, which is very easy in use. It allows you to <span className='font-italic'>add, edit, delete, sort</span> tasks and save them in data base.</h4>

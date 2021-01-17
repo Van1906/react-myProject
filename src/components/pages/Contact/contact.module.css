@@ -1,5 +1,6 @@
 .wrapper {
     margin-top: 40px;
+    min-height: calc(100vh - 341px);
 }
 
 .message {
@@ -81,6 +82,10 @@
 @media (max-width: 991px) {
     .messageIcon {
         font-size: 110px;
+    }
+
+    .wrapper {
+        min-height: calc(100vh - 337px);
     }
 }
 
