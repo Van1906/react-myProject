@@ -11,11 +11,11 @@ export function getTasks(data={}){
     for(let key in data){
         let value = data[key];
         query = `${query}${key}=${value}&`;
-    }
+    };
 
     if(query==='?') {
         query = '';
-    }
+    };
 
     return (dispatch)=>{
         dispatch({type: actionTypes.LOADING});
@@ -27,8 +27,8 @@ export function getTasks(data={}){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 export function getSingleTask(id){
     return (dispatch)=>{
@@ -41,8 +41,8 @@ export function getSingleTask(id){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 export function addTask(data){
     return (dispatch)=>{
@@ -55,8 +55,8 @@ export function addTask(data){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 export function removeTask(taskId, from='tasks', redirect){
     return (dispatch)=>{
@@ -67,13 +67,13 @@ export function removeTask(taskId, from='tasks', redirect){
             dispatch({type: actionTypes.REMOVE_TASK_SUCCESS, taskId, from});
             if(from === 'single'){
                 redirect('/');
-            }
+            };
         })
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 export function saveEditTask(data, from){
     return (dispatch)=>{
@@ -86,8 +86,8 @@ export function saveEditTask(data, from){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 export function changeTaskStatus(id, data, from){
     return (dispatch)=>{
@@ -100,8 +100,8 @@ export function changeTaskStatus(id, data, from){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 
 export function removeSelected(taskIds){
@@ -115,8 +115,8 @@ export function removeSelected(taskIds){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};
 
 
 export function send(data){
@@ -130,5 +130,5 @@ export function send(data){
         .catch(err =>{
             dispatch({type: actionTypes.ERROR, error: err.message});
         })
-    }
-}
+    };
+};

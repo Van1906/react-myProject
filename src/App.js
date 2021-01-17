@@ -18,11 +18,11 @@ function App(props) {
   const {errorMessage, successMessage, loading} = props
   if(errorMessage){
     toast.error(errorMessage);
-  }
+  };
 
   if(successMessage){
     toast.success(successMessage);
-  }
+  };
 
 
   return (

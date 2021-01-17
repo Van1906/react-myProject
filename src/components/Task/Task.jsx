@@ -18,7 +18,7 @@ function Task(props){
 
         const {onCheck, data} = props;
         onCheck(data._id);
-    }
+    };
 
 
     const task = props.data;
@@ -103,7 +103,7 @@ function Task(props){
                 </Card.Body>
             </Card>
             </>
-        )
+        );
 };
 
 
@@ -111,7 +111,7 @@ Task.propTypes = {
     data: PropTypes.object.isRequired,
     onCheck: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {

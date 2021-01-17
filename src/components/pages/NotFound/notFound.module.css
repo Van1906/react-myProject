@@ -40,8 +40,6 @@
 }
 
 
-
-
 @media (max-width: 768px) {
     .oops {
         font-size: 80px;
@@ -57,7 +55,6 @@
         font-size: 22px;
     }
 }
-
 
 @media (max-width: 576px) {
     .oops {

@@ -33,7 +33,7 @@ function Confirm(props) {
 Confirm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired
 }
 
 export default Confirm;

@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrownOpen } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
-import styles from './notFound.module.css'
+import styles from './notFound.module.css';
 
 
 export default function NotFound(){
@@ -32,4 +32,4 @@ export default function NotFound(){
             </div>
         </div>
     );
-}
+};

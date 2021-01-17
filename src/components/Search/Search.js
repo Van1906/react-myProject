@@ -199,8 +199,8 @@ function Search(props){
                 </Navbar.Collapse>
             </Navbar>
         </div>
-    )
-}
+    );
+};
 
 
 const mapDispatchToProps = {
