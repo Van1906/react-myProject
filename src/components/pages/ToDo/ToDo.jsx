@@ -97,7 +97,7 @@ class ToDo extends PureComponent{
 
         return (
             <>
-                <Container>
+                <Container className={styles.main}>
                     <Search />
                     <Row className='justify-content-center text-center'> 
                         <Col xs={12} sm={10} md={8} lg={6}>

@@ -1,5 +1,17 @@
+.main {
+    min-height: calc(100vh - 341px);
+}
+
 .removeButton {
     margin: 20px 0 10px 0;
+}
+
+
+@media (max-width: 991px) {
+    .main {
+        min-height: calc(100vh - 337px);
+    }
+    
 }
 
 

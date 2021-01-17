@@ -41,8 +41,6 @@ const defaultvalues = {
     };
 
     const validate = () =>{
-        
-
         const regxEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         const {name, email, message} = values;
         let nameError = '';
@@ -54,17 +52,6 @@ const defaultvalues = {
             nameError = 'Fill the name field, please !!!';
         };
         
-
-        
-        // if(!email.includes('@')) {
-        //     setEmailRequiredShown(true);
-        //     emailError = 'Write valid email, please !!!';
-        // };
-
-        // if(!email) {
-        //     setEmailRequiredShown(true);
-        //     emailError = 'Fill the email field, please !!!';
-        // };
 
         if(!regxEmail.test(email)) {
             setEmailRequiredShown(true);
@@ -158,7 +145,6 @@ const defaultvalues = {
                                 variant="info" 
                                 type="submit" 
                                 className={styles.buttonSend}
-                                // onClick={handleSubmit}
                                 >
                                 Send message
                                 </Button>
