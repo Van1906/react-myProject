@@ -84,6 +84,7 @@ const defaultvalues = {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const isValid = validate();
         if(isValid) {
             props.send(values);
@@ -110,49 +111,50 @@ const defaultvalues = {
                     <div className={styles.formBlock}>
                         <h1 className='text-center'>Contact us</h1>
                         <div className={styles.formGroup}>
-                        
-                            <div className={nameRequiredShown ? styles.showRequired : styles.hideRequired}>{values.nameError}</div>
-                            <Form.Group>
-                                <Form.Control 
-                                type="text" 
-                                placeholder="Your name" 
-                                value={values.name} 
-                                onChange={handleChang}
-                                name='name'
-                                ref = {nameRef}
-                                />
-                            </Form.Group>
+                            <Form onSubmit={handleSubmit}>
+                                <div className={nameRequiredShown ? styles.showRequired : styles.hideRequired}>{values.nameError}</div>
+                                <Form.Group>
+                                    <Form.Control 
+                                    type="text" 
+                                    placeholder="Your name" 
+                                    value={values.name} 
+                                    onChange={handleChang}
+                                    name='name'
+                                    ref = {nameRef}
+                                    />
+                                </Form.Group>
 
-                            <div className={emailRequiredShown ? styles.showRequired : styles.hideRequired}>{values.emailError}</div>      
-                            <Form.Group>
-                                <Form.Control 
-                                type="email" 
-                                placeholder="Your email" 
-                                value={values.email} 
-                                onChange={handleChang}
-                                name='email'
-                                />
-                            </Form.Group>
+                                <div className={emailRequiredShown ? styles.showRequired : styles.hideRequired}>{values.emailError}</div>      
+                                <Form.Group>
+                                    <Form.Control 
+                                    type="email" 
+                                    placeholder="Your email" 
+                                    value={values.email} 
+                                    onChange={handleChang}
+                                    name='email'
+                                    />
+                                </Form.Group>
 
-                            <div className={messageRequiredShown ? styles.showRequired : styles.hideRequired}>{values.messageError}</div>
-                            <Form.Group>
-                                <Form.Control 
-                                as="textarea" 
-                                placeholder="Message"  
-                                value={values.message} 
-                                onChange={handleChang}
-                                name='message'
-                                />
-                            </Form.Group>
+                                <div className={messageRequiredShown ? styles.showRequired : styles.hideRequired}>{values.messageError}</div>
+                                <Form.Group>
+                                    <Form.Control 
+                                    as="textarea" 
+                                    placeholder="Message"  
+                                    value={values.message} 
+                                    onChange={handleChang}
+                                    name='message'
+                                    />
+                                </Form.Group>
 
-                            <Button 
-                            variant="info" 
-                            type="submit" 
-                            className={styles.buttonSend}
-                            onClick={handleSubmit}
-                            >
-                            Send message
-                            </Button>
+                                <Button 
+                                variant="info" 
+                                type="submit" 
+                                className={styles.buttonSend}
+                                // onClick={handleSubmit}
+                                >
+                                Send message
+                                </Button>
+                            </Form>
                         </div>
                     </div>
                 </Col>
