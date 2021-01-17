@@ -29,8 +29,6 @@ const defaultvalues = {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    
-
     const [values, setvalues] = useState({
         defaultvalues
     });
@@ -61,7 +59,7 @@ const defaultvalues = {
 
         else if(!email.includes('@')) {
             setEmailRequiredShown(true);
-            emailError = 'Invalid Email !!!';
+            emailError = 'Invalid email !!!';
         }
 
         if(!message) {
@@ -97,7 +95,6 @@ const defaultvalues = {
 
     return(
         <>
-        
         <Container className={styles.wrapper}>
             <Row className={styles.rowWrapper}>
                 <Col sm={4} className={`${styles.message} ${styles.first}`}>
@@ -156,7 +153,6 @@ const defaultvalues = {
                             >
                             Send message
                             </Button>
-                        
                         </div>
                     </div>
                 </Col>
