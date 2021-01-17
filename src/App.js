@@ -29,7 +29,7 @@ function App(props) {
     <>
     <div>
       <NavMenu />
-
+      
       <Switch>
         <Route path='/' exact component = { ToDo }/>
         <Route path='/task' exact component = { ToDo }/>
@@ -38,7 +38,7 @@ function App(props) {
         <Route path='/contact' exact component = { Contact }/>
         <Route path='/404' exact component = { NotFound }/>
         <Redirect to='/404'/>
-      </Switch>
+      </Switch> 
     </div>
 
     <Footer />
@@ -56,6 +56,7 @@ function App(props) {
     />
 
     {loading && <Spinner />}
+
     </>
   );
 };

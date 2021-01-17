@@ -30,6 +30,6 @@ export default function NotFound(){
                  page, please.
                 </p>
             </div>
-        </div>
+        </div> 
     );
 };
