@@ -30,7 +30,7 @@ const defaultvalues = {
     }, []);
 
     const [values, setvalues] = useState({
-        defaultvalues
+        // defaultvalues
     });
 
     const handleChang = ({target: {name, value}})=>{
@@ -65,7 +65,7 @@ const defaultvalues = {
 
         if(nameError || emailError || messageError) {
             setvalues({
-                // ...values,
+                ...values,
                 nameError,
                 emailError,
                 messageError
