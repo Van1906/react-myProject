@@ -29,12 +29,12 @@ const defaultvalues = {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [values, setvalues] = useState({
-        // defaultvalues
-    });
+    // const [values, setvalues] = useState({
+    //     // defaultvalues
+    // });
 
 
-    // const [values, setvalues] = useState({});
+    const [values, setvalues] = useState({});
 
     const handleChang = ({target: {name, value}})=>{
         setvalues({
@@ -86,7 +86,7 @@ const defaultvalues = {
         const isValid = validate();
         if(isValid) {
             console.log('values', values)
-            props.send();
+            props.send(values);
             setvalues(defaultvalues);
             nameRef.current.focus();
         };
