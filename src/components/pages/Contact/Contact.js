@@ -64,7 +64,6 @@ const defaultvalues = {
 
         if(nameError || emailError || messageError) {
             setvalues({
-                ...values,
                 nameError,
                 emailError,
                 messageError
