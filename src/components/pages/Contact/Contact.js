@@ -89,9 +89,7 @@ const defaultvalues = {
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
-            console.log('values', values);
             props.send(values);
-            console.log('values', values);
         };
     };
 
@@ -170,7 +168,6 @@ const defaultvalues = {
 const mapStateToProps = (state)=>{
     return {
         sendFormSuccess: state.sendFormSuccess
-
     }
 }
 
