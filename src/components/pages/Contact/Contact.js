@@ -92,7 +92,7 @@ const defaultvalues = {
 
             // props.send(values);
             const {name, email, message} = values;
-            props.send(name, email, message);
+            props.send({name, email, message});
         };
     };
 
