@@ -80,14 +80,13 @@ const defaultvalues = {
         return true;
     };
 
-    const handleSubmit = (e) => {
+     const handleSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
-            console.log('values', values)
-            props.send(values);
-            setvalues(defaultvalues);
+            await props.send(values);
+            // setvalues(defaultvalues);
             nameRef.current.focus();
         };
     };
