@@ -82,7 +82,8 @@ const defaultvalues = {
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
-            props.send(values);
+            console.log('values', values)
+            props.send();
             setvalues(defaultvalues);
             nameRef.current.focus();
         };
