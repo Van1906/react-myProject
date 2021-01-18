@@ -86,7 +86,7 @@ const defaultvalues = {
         const isValid = validate();
         if(isValid) {
             await props.send(values);
-            // setvalues(defaultvalues);
+            setvalues(defaultvalues);
             nameRef.current.focus();
         };
     };
