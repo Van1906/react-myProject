@@ -22,6 +22,7 @@ const defaultState = {
             addTaskSuccess: false,
             removeTasksSuccess: false,
             editTaskSuccess: false,
+            sendFormSuccess: false,
             errorMessage: null,
             successMessage: null
         };
