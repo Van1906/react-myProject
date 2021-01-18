@@ -76,20 +76,23 @@ const defaultvalues = {
     };
 
 
-    useEffect(()=>{
-        if(props.sendFormSuccess) {
-            setvalues(defaultvalues);
-            nameRef.current.focus();
-        }
+    // useEffect(()=>{
+    //     if(props.sendFormSuccess) {
+    //         setvalues(defaultvalues);
+    //         nameRef.current.focus();
+    //     }
 
-    }, [props.sendFormSuccess]);
+    // }, [props.sendFormSuccess]);
 
      const handleSubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
+            console.log('values', values);
             props.send(values);
+            console.log('values', values);
+            setvalues(defaultvalues);
         };
     };
 
@@ -165,16 +168,16 @@ const defaultvalues = {
 };
 
 
-const mapStateToProps = (state)=>{
-    return {
-        sendFormSuccess: state.sendFormSuccess
+// const mapStateToProps = (state)=>{
+//     return {
+//         sendFormSuccess: state.sendFormSuccess
 
-    }
-}
+//     }
+// }
 
 const mapDispatchToProps = {
     send
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contact);
+export default connect(null, mapDispatchToProps)(Contact);
