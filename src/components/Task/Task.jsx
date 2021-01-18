@@ -65,20 +65,20 @@ function Task(props){
                         {
                             task.status === 'active' ?
                             <Button 
-                            variant="primary" 
+                            variant="success" 
                             className={styles.actionButton}
                             onClick={()=>props.changeTaskStatus(task._id, {status: 'done'}, 'tasks')}
                             disabled = {disabled}
                             >
-                            <FontAwesomeIcon icon={faHistory}/>  
+                            <FontAwesomeIcon icon={faCheck}/>  
                             </Button> :
                             <Button 
-                            variant="success" 
+                            variant="primary" 
                             className={styles.actionButton}
                             onClick={()=>props.changeTaskStatus(task._id, {status: 'active'}, 'tasks')}
                             disabled = {disabled}
                             >
-                            <FontAwesomeIcon icon={faCheck}/>  
+                            <FontAwesomeIcon icon={faHistory}/>  
                             </Button>
                         }
 

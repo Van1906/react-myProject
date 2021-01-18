@@ -74,18 +74,18 @@ function SingleTask(props){
                                     {
                                         task.status === 'active' ?
                                         <Button 
-                                        variant="primary" 
+                                        variant="success" 
                                         className={styles.actionButton}
                                         onClick={()=>props.changeTaskStatus(task._id, {status: 'done'}, 'single')}
                                         >
-                                        <FontAwesomeIcon icon={faHistory}/>  
+                                        <FontAwesomeIcon icon={faCheck}/> 
                                         </Button> :
                                         <Button 
-                                        variant="success" 
+                                        variant="primary" 
                                         className={styles.actionButton}
                                         onClick={()=>props.changeTaskStatus(task._id, {status: 'active'}, 'single')}
                                         >
-                                        <FontAwesomeIcon icon={faCheck}/>  
+                                        <FontAwesomeIcon icon={faHistory}/> 
                                         </Button>
                                     }
                                         <Button 
