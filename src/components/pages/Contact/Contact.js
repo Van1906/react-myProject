@@ -29,10 +29,6 @@ const defaultvalues = {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // const [values, setvalues] = useState({
-    //     // defaultvalues
-    // });
-
 
     const [values, setvalues] = useState({});
 
@@ -80,14 +76,21 @@ const defaultvalues = {
         return true;
     };
 
-     const handleSubmit = async (e) => {
+
+    useEffect(()=>{
+        if(props.sendFormSuccess) {
+            setvalues(defaultvalues);
+            nameRef.current.focus();
+        }
+
+    }, [props.sendFormSuccess]);
+
+     const handleSubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
-            await props.send(values);
-            setvalues(defaultvalues);
-            nameRef.current.focus();
+            props.send(values);
         };
     };
 
@@ -163,9 +166,16 @@ const defaultvalues = {
 };
 
 
+const mapStateToProps = (state)=>{
+    return {
+        sendFormSuccess: state.sendFormSuccess
+
+    }
+}
+
 const mapDispatchToProps = {
     send
 };
 
 
-export default connect(null, mapDispatchToProps)(Contact);
+export default connect(mapStateToProps, mapDispatchToProps)(Contact);
