@@ -14,7 +14,7 @@ export default function Footer(){
                     <ul className={styles.socialIconsUl}>
                         <li className={`${styles.socialIconsLi}`}>
                             <a 
-                            href="https://www.linkedin.com/feed/" 
+                            href="https://www.linkedin.com/in/vanuhi-khachikyan-624a126b/" 
                             target='_blank' 
                             rel="noopener noreferrer"
                             > 
