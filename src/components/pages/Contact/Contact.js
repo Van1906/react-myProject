@@ -64,7 +64,7 @@ const defaultvalues = {
 
         if(nameError || emailError || messageError) {
             setvalues({
-                values, 
+                values,
                 nameError,
                 emailError,
                 messageError
@@ -90,9 +90,8 @@ const defaultvalues = {
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
-            // const {name, email, message} = values;
-            // props.send({name, email, message});
-            props.send(values);
+            const {name, email, message} = values;
+            props.send({name, email, message});
         };
     };
 
