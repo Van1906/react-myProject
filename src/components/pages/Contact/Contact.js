@@ -90,12 +90,8 @@ const defaultvalues = {
         e.stopPropagation();
         const isValid = validate();
         if(isValid) {
-            // const {name, email, message} = values;
-            // props.send({name, email, message});
-
-
-            // const {name, email, message} = values;
-            props.send(values);
+            const {name, email, message} = values;
+            props.send({name, email, message});
         };
     };
 
