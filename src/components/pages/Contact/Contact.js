@@ -49,29 +49,28 @@ const defaultvalues = {
         if(!name) {
             setNameRequiredShown(true);
             nameError = 'Fill the name field, please !!!';
-        };
+        }
         
-
         if(!regxEmail.test(email)) {
             setEmailRequiredShown(true);
-            emailError = 'Fill the valid email please !!!';
-        };
+            emailError = 'Fill the valid email, please !!!';
+        }
 
         if(!message) {
             setMessageRequiredShown(true);
             messageError = 'Fill the message field, please !!!';
-        };
+        }
 
         if(nameError || emailError || messageError) {
             setvalues({
-                values,
+                ...values,
                 nameError,
                 emailError,
                 messageError
             });
 
             return false;
-        };
+        }
 
         return true;
     };
@@ -92,7 +91,7 @@ const defaultvalues = {
         if(isValid) {
             const {name, email, message} = values;
             props.send({name, email, message});
-        };
+        }
     };
 
 
@@ -171,7 +170,7 @@ const mapStateToProps = (state)=>{
     return {
         sendFormSuccess: state.sendFormSuccess
     }
-}
+};
 
 const mapDispatchToProps = {
     send
