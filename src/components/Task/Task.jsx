@@ -37,7 +37,7 @@ function Task(props){
                         <Link 
                         to={`/task/${task._id}`} 
                         className="text-info text-decoration-none">
-                        <h5>{trimString(task.title.toUpperCase(), 20)}</h5>
+                        <h5>{trimString(task.title, 20)}</h5>
                         </Link>
                     </Card.Title>
                     <Card.Text 

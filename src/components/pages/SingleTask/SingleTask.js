@@ -47,7 +47,7 @@ function SingleTask(props){
                             <Card className={styles.task}>
                                 <Card.Body>
                                     <Card.Title>
-                                    <h3 className={`${styles.titleFont} text-info`} >{task.title.toUpperCase()}</h3>
+                                    <h3 className={`${styles.titleFont} text-info`} >{task.title}</h3>
                                     </Card.Title>
                                     <Card.Text 
                                     className='font-italic mb-0'>
